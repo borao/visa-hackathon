@@ -12,9 +12,14 @@ class Merchant(models.Model):
         CLOTHING = 4
         GROCERY = 5
         BEAUTY = 6
+        OTHERS = 7
 
-    merchantName = models.CharField(max_length=100, null=True)
-    category = models.IntegerField(choices=Category.choices, null=True)
-    hours = models.CharField(max_length=100, null=True)
-    merchantID = models.CharField(max_length=200, null=True)
-    bankAccount = models.CharField(max_length=200, null=True)
+    merchantName = models.CharField(max_length=100, blank=False)
+    category = models.IntegerField(choices=Category.choices, default=7)
+    hours = models.CharField(max_length=100)
+    merchantID = models.CharField(primary_key=True, max_length=200)
+    # TODO: check how bank account works with Visa payment
+    bankAccount = models.CharField(max_length=200, blank=True)
+
+    def __str__(self):
+        return str(self.merchantName)

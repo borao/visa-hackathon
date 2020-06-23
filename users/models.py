@@ -8,38 +8,36 @@ class Customer(models.Model):
     # a customer can only have one user,
     # and a user can only have one customer
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=100, null=True)
-    first_name = models.CharField(max_length=50, null=True)
-    last_name = models.CharField(max_length=50, null=True)
-    email = models.CharField(max_length=200, null=True)
-    home_address = models.CharField(max_length=200, null=True)
-    phone_number = models.CharField(max_length=15, null=True)
-    # userQR = models.ImageField(default='default_userQR.jpg', upload_to='userQR')
+    home_address = models.CharField(max_length=200)
+    phone_number = models.IntegerField()
     profilePic = models.ImageField(default='minion.jpg', upload_to='profile_pics')
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
 
 class Card(models.Model):
-    cardID = models.IntegerField(primary_key=True)
-    customerID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    expiration_date = models.DateTimeField(default=timezone.now)
-    cvc = models.IntegerField()
-    first_name = models.CharField(max_length=50, null=True)
-    last_name = models.CharField(max_length=50, null=True)
-    street = models.CharField(max_length=100, null=True)
-    city = models.CharField(max_length=50, null=True)
-    state = models.CharField(max_length=50, null=True)
-    zipcode = models.CharField(max_length=5, null=True)
+    cardID = models.IntegerField(primary_key=True, blank=False)
+    customerID = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    expiration_date = models.DateTimeField(default=timezone.now, blank=False)
+    cvv = models.PositiveSmallIntegerField(blank=False, default='')
+    first_name = models.CharField(max_length=50, blank=False)
+    last_name = models.CharField(max_length=50, blank=False)
+    street = models.CharField(max_length=100, blank=False)
+    city = models.CharField(max_length=50, blank=False)
+    state = models.CharField(max_length=50, blank=False)
+    zipcode = models.IntegerField(blank=False)
 
     def __str__(self):
         return str(self.cardID)
 
 
 class Friendship(models.Model):
-    friendA = models.ForeignKey(Customer, related_name="friendA", on_delete=models.SET_NULL, blank=True, null=True)
-    friendB = models.ForeignKey(Customer, related_name="friendB", on_delete=models.SET_NULL, blank=True, null=True)
+    friendA = models.ForeignKey(Customer, related_name="friendA", on_delete=models.CASCADE)
+    friendB = models.ForeignKey(Customer, related_name="friendB", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.friendA) +" and " + str(self.friendB)
 
 
 

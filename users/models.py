@@ -22,10 +22,10 @@ class Customer(models.Model):
 
 
 class Card(models.Model):
-    cardID = models.IntegerField(primary_key=True, max_length=16)
+    cardID = models.IntegerField(primary_key=True)
     customerID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     expiration_date = models.DateTimeField(default=timezone.now)
-    cvc = models.IntegerField(max_length=4)
+    cvc = models.IntegerField()
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
     street = models.CharField(max_length=100, null=True)
@@ -38,8 +38,8 @@ class Card(models.Model):
 
 
 class Friendship(models.Model):
-    friendA = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    friendB = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    friendA = models.ForeignKey(Customer, related_name="friendA", on_delete=models.SET_NULL, blank=True, null=True)
+    friendB = models.ForeignKey(Customer, related_name="friendB", on_delete=models.SET_NULL, blank=True, null=True)
 
 
 

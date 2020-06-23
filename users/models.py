@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from merchant import models as merchant_model
 
 
 # Create your models here.
@@ -20,29 +19,6 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.username
-
-
-class Order(models.Model):
-    # class Amount(models.IntegerChoices):
-    #     FIVE = 1
-    #     TEN = 2
-    #     FIFTEEN = 3
-    #     TWENTY = 4
-    #     TWENTY_FIVE = 5
-    #     FIFTY = 6
-
-    senderID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    receiverID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    date_ordered = models.DateTimeField(default=timezone.now)
-    expiration_date = models.DateTimeField(default=timezone.now)
-    transactionID = models.CharField(max_length=200, null=True)
-    merchantID = models.ForeignKey(merchant_model.Merchant, on_delete=models.SET_NULL, blank=True, null=True)
-    giftAmount = models.IntegerField(choices=Amount.choices, null=True)
-    message = models.TextField()
-    orderQR = models.ImageField(default='default_orderQR.jpg', upload_to='orderQR')
-
-    def __str__(self):
-        return str(self.id)
 
 
 class Card(models.Model):

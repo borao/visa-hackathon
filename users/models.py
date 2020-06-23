@@ -23,16 +23,16 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
-    # class Amount(models.IntegerChoices):
-    #     FIVE = 1
-    #     TEN = 2
-    #     FIFTEEN = 3
-    #     TWENTY = 4
-    #     TWENTY_FIVE = 5
-    #     FIFTY = 6
+    class Amount(models.IntegerChoices):
+        FIVE = 1
+        TEN = 2
+        FIFTEEN = 3
+        TWENTY = 4
+        TWENTY_FIVE = 5
+        FIFTY = 6
 
-    senderID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    receiverID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    # senderID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    # receiverID = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     date_ordered = models.DateTimeField(default=timezone.now)
     expiration_date = models.DateTimeField(default=timezone.now)
     transactionID = models.CharField(max_length=200, null=True)
@@ -61,9 +61,9 @@ class Card(models.Model):
         return str(self.cardID)
 
 
-class Friendship(models.Model):
-    friendA = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-    friendB = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+# class Friendship(models.Model):
+#     friendA = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+#     friendB = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
 
 
 

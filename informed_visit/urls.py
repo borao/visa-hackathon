@@ -20,6 +20,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from users import urls as userUrl
 from order import urls as orderUrl
+from merchant import urls as merchantUrl
 
 router = DefaultRouter()
 
@@ -27,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include(userUrl)),
     path('orders/', include(orderUrl)),
+    path('merchants/', include(merchantUrl)),
     # TODO: seems like we need to handle profile page (dashboard) in the django's User
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 

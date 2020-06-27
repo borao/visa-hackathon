@@ -52,4 +52,3 @@ if __name__ == '__main__':
     # latitude = "37.363922"
     # choice = 1
     MerchantViewSet(viewsets.ModelViewSet).getMerchantByCategory(50, 2, "95131")
-    

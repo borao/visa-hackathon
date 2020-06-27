@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 
 # Create your models here.
@@ -8,9 +10,18 @@ class Customer(models.Model):
     # a customer can only have one user,
     # and a user can only have one customer
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    home_address = models.CharField(max_length=200)
+    street = models.CharField(max_length=100, blank=False)
+    city = models.CharField(max_length=50, blank=False)
+    state = models.CharField(max_length=50, blank=False)
+    zipcode = models.CharField(max_length=10, blank=False)
+    longtitude = models.CharField(max_length=100, blank=False)
+    latitude = models.CharField(max_length=100, blank=False)
     phone_number = models.IntegerField()
     profilePic = models.ImageField(default='minion.jpg', upload_to='profile_pics')
+    distance = models.IntegerField(default=50,
+                                   validators=[
+                                       MaxValueValidator(100),
+                                       MinValueValidator(1)])
 
     def __str__(self):
         return self.user.username
@@ -26,7 +37,7 @@ class Card(models.Model):
     street = models.CharField(max_length=100, blank=False)
     city = models.CharField(max_length=50, blank=False)
     state = models.CharField(max_length=50, blank=False)
-    zipcode = models.IntegerField(blank=False)
+    zipcode = models.CharField(max_length=10, blank=False)
 
     def __str__(self):
         return str(self.cardID)

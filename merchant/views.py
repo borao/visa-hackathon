@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from .models import *
 from .serializers import *
 from .merchant_locator_api.src.customizedMerchantLocator import MerchantLocator
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -30,7 +31,7 @@ class MerchantViewSet(viewsets.ModelViewSet):
                                                                                       zipcode=zipcode)
         for i in range(len(merchant_by_category)-1):
             print(merchant_by_category[i])
-        return merchant_by_category
+        return JsonResponse(merchant_by_category, safe=False)
 
     def getMerchantByName(self, distance, merchantName, longitude, latitude):
 
@@ -40,7 +41,7 @@ class MerchantViewSet(viewsets.ModelViewSet):
                                                                               longitude=longitude)
         for i in range(len(merchant_by_name)-1):
             print(merchant_by_name[i])
-        return merchant_by_name
+        return JsonResponse(merchant_by_name, safe=False)
 
 
 if __name__ == '__main__':

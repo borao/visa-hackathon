@@ -5,7 +5,8 @@ from rest_framework.decorators import action
 from .models import *
 from .serializers import *
 from .merchant_locator_api.src.customizedMerchantLocator import MerchantLocator
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+
 
 # Create your views here.
 

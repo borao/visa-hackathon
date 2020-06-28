@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from .models import *
 from .serializers import *
 from .merchant_locator_api.src.customizedMerchantLocator import MerchantLocator
-from django.http import JsonResponse
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -23,8 +23,8 @@ class MerchantViewSet(viewsets.ModelViewSet):
                "OTHERS": '"5992", "5193", "7032", "7911", "7829", "7832", "7841"'} #OTHERS
         return mcc[category]
 
-    @action(detail=True, methods=['post'], name='get-merchant-by-category')
-    def getMerchantByCategory(self, request, distance, category, zipcode):
+    @action(detail=False, url_path='getMerchantByCategory/(?P<distance>[^/.]+)/(?P<merchantCategoryCode>[^/.]+)/(?P<merchantPostalCode>[^/.]+)')
+    def getMerchantByCategory(self, request, distance, merchantCategoryCode, merchantPostalCode):
         """
         get merchange by category
         :param distance: distance from user's location
@@ -33,16 +33,21 @@ class MerchantViewSet(viewsets.ModelViewSet):
         :return:
         """
 
-        categoryCode = self.mapCategoryToMCC(category)
+        merchantCategoryCode = self.mapCategoryToMCC(merchantCategoryCode)
 
-        merchant_by_category = MerchantLocator.MerchantLocator.postSearch_by_Category(distance=distance,
-                                                                                      merchantCategoryCode=categoryCode,
-                                                                                      zipcode=zipcode)
+        obj = MerchantLocator.MerchantLocator()
+        merchant_by_category = obj.postSearch_by_Category(distance=distance,
+                                                          merchantCategoryCode=merchantCategoryCode,
+                                                          zipcode=merchantPostalCode)
+
+
         for i in range(len(merchant_by_category)-1):
-            print(merchant_by_category[i])
-        return JsonResponse(merchant_by_category, safe=False)
 
-    @action(detail=True, methods=['post'], name='get-merchant-by-name')
+            print(merchant_by_category[i])
+        return HttpResponse(merchant_by_category, content_type="application/json")
+
+
+    @action(detail=True, methods=['post'])
     def getMerchantByName(self, request, distance, merchantName, longitude, latitude):
 
         merchant_by_name = MerchantLocator.MerchantLocator.postSearch_by_Name(distance=distance,

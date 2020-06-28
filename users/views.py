@@ -23,7 +23,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return mcc[category]
 
     @action(detail=True, methods=['post'])
-    def getMerchantByCategory(self, request, pk=None):
+    def getMerchantByCategory(self, request):
         """
         get merchange by category
         :param distance: distance from user's location
@@ -48,7 +48,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return JsonResponse(merchant_by_category, safe=False)
 
     @action(detail=True, methods=['post'])
-    def getMerchantByName(self, request, pk=None):
+    def getMerchantByName(self, request):
         # distance, merchantName, longitude, latitude
         requestData = request.data
         serializer = self.get_serializer(data=requestData)

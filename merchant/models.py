@@ -19,6 +19,7 @@ class Merchant(models.Model):
     merchantID = models.CharField(primary_key=True, max_length=200)
     # TODO: check how bank account works with Visa payment
     # bankAccount = models.CharField(max_length=200, blank=True)
+    # TODO: include storeID
 
 
     def __str__(self):

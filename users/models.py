@@ -16,12 +16,14 @@ class Customer(models.Model):
     zipcode = models.CharField(max_length=10, blank=False, default='zipcode_string')
     longtitude = models.CharField(max_length=100, blank=False, default='-122.2763649')
     latitude = models.CharField(max_length=100, blank=False, default='37.5592521')
-    phone_number = models.IntegerField()
+    phone_number = models.IntegerField(blank=True)
     profilePic = models.ImageField(default='minion.jpg', upload_to='profile_pics')
     distance = models.IntegerField(default=50,
                                    validators=[
                                        MaxValueValidator(100),
                                        MinValueValidator(1)])
+    merchantCategoryCode = models.CharField(max_length=100, blank=True)
+    merchantPostalCode = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.user.username

@@ -1,8 +1,11 @@
 from datetime import datetime, timedelta
+
 from django.db import models
-from django.utils import timezone
-from users import models as customer_model
+
 from merchant import models as merchant_model
+from users import models as customer_model
+
+
 # Create your models here.
 
 

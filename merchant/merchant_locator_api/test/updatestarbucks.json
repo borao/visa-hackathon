@@ -1,0 +1,21 @@
+{
+  "responseAttrList": [
+    "GNLOCATOR"
+  ],
+  "header": {
+    "messageDateTime": "2020-06-22T22:41:17.903",
+    "startIndex": "0",
+    "requestMessageId": "Request_001"
+  },
+  "searchOptions": {
+    "matchIndicators": "true"
+  },
+  "searchAttrList": {
+    "distance": "50",
+    "merchantName": "starbucks",
+    "longitude": "-121.929163",
+    "merchantCountryCode": "840",
+    "distanceUnit": "KM",
+    "latitude": "37.363922"
+  }
+}

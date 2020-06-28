@@ -108,7 +108,7 @@ class MerchantLocator:
             "merchantName": merchantInfo["visaMerchantName"],
             "merchantID": merchantInfo["visaMerchantId"],
             "storeID": merchantInfo['visaStoreId'],
-            "streeAddress": merchantInfo["merchantStreetAddress"],
+            "streetAddress": merchantInfo["merchantStreetAddress"],
             "zipcode": merchantInfo["merchantPostalCode"],
             "state": merchantInfo["merchantState"],
             "city": merchantInfo["merchantCity"],
@@ -119,21 +119,21 @@ class MerchantLocator:
         json_dump = json.dumps(a_merchant)
         return json_dump
 
-    def postSearch_by_Category(self, distance, merchantCategoryCode, zipcode):
+    def postSearch_by_Category(self, start_idx, distance='50', merchantCategoryCode='"5451","5814"', zipcode="95131"):
         attrList = '"searchAttrList":{"distance": "' + str(distance) + \
                    '","merchantCategoryCode":[' + merchantCategoryCode + \
                    '],"merchantCountryCode":"840", "distanceUnit":"m", "merchantPostalCode":"' + zipcode + '"}}'
         payload = '{"responseAttrList":["GNLOCATOR"],' \
                   '"header":{"messageDateTime":"2020-06-22T22:41:17.903",' \
-                  '"startIndex":"0", "requestMessageId":"Request_001"},' + attrList
+                  '"startIndex":"' + str(start_idx) + '", "requestMessageId":"Request_001"},' + attrList
 
         numRecords = self.numRecordMatched(payload)
 
         merchant_list = []
 
         if numRecords >= 1:
-            total = 10 if numRecords > 10 else numRecords
-            if numRecords > 10:
+            total = 1 if numRecords > 1 else numRecords
+            if numRecords > 1:
                 for i in range(total):
                     # TODO: filter redundant stores
                     payload = '{"responseAttrList":["GNLOCATOR"],' \

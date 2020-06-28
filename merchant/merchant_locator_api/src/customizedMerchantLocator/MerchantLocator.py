@@ -119,7 +119,7 @@ class MerchantLocator:
         json_dump = json.dumps(a_merchant)
         return json_dump
 
-    def postSearch_by_Category(self, start_idx, distance='50', merchantCategoryCode='"5451","5814"', zipcode="95131"):
+    def postSearch_by_Category(self, start_idx, distance, merchantCategoryCode, zipcode):
         attrList = '"searchAttrList":{"distance": "' + str(distance) + \
                    '","merchantCategoryCode":[' + merchantCategoryCode + \
                    '],"merchantCountryCode":"840", "distanceUnit":"m", "merchantPostalCode":"' + zipcode + '"}}'
@@ -138,7 +138,7 @@ class MerchantLocator:
                     # TODO: filter redundant stores
                     payload = '{"responseAttrList":["GNLOCATOR"],' \
                               '"header":{"messageDateTime":"2020-06-22T22:41:17.903",' \
-                              '"startIndex": "' + str(i) + '", "requestMessageId":"Request_001"},' + attrList
+                              '"startIndex": "' + str(start_idx) + '", "requestMessageId":"Request_001"},' + attrList
                     print(payload)
                     merchant_list.append(self.__testpostmerchant_locator(payload))
 

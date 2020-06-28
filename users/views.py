@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
-from .merchant_locator_api.src.customizedMerchantLocator import MerchantLocator
+from merchant.merchant_locator_api.src.customizedMerchantLocator import MerchantLocator
 from django.http import JsonResponse
 from rest_framework.decorators import action
 

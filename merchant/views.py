@@ -6,6 +6,7 @@ from .models import *
 from .serializers import *
 from .merchant_locator_api.src.customizedMerchantLocator import MerchantLocator
 from django.http import HttpResponse, JsonResponse
+from multiprocessing import Pool
 
 
 # Create your views here.
@@ -37,15 +38,12 @@ class MerchantViewSet(viewsets.ModelViewSet):
         merchantCategoryCode = self.mapCategoryToMCC(merchantCategoryCode)
 
         obj = MerchantLocator.MerchantLocator()
-        merchant_by_category = obj.postSearch_by_Category(distance=distance,
-                                                          merchantCategoryCode=merchantCategoryCode,
-                                                          zipcode=merchantPostalCode)
-
-
-        for i in range(len(merchant_by_category)-1):
-
-            print(merchant_by_category[i])
-        return HttpResponse(merchant_by_category, content_type="application/json")
+        p = Pool(5)
+        queries = list(map(lambda x: (x, distance, merchantCategoryCode, merchantPostalCode), range(10)))
+        print(queries)
+        result = p.starmap(obj.postSearch_by_Category, queries)
+        print(result)
+        return HttpResponse(result, content_type="application/json")
 
 
     @action(detail=True, methods=['post'])

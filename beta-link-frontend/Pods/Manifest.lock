@@ -1,0 +1,28 @@
+PODS:
+  - CYLTabBarController (1.24.2):
+    - CYLTabBarController/Core (= 1.24.2)
+  - CYLTabBarController/Core (1.24.2)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
+  - StoryView (1.0)
+
+DEPENDENCIES:
+  - CYLTabBarController (~> 1.24.0)
+  - SQLite.swift (~> 0.12.0)
+  - StoryView (~> 1.0)
+
+SPEC REPOS:
+  trunk:
+    - CYLTabBarController
+    - SQLite.swift
+    - StoryView
+
+SPEC CHECKSUMS:
+  CYLTabBarController: e7440ad0992edfb8ac14a6c793f43aa636c5cba5
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
+  StoryView: 17d2a421b678874a80235643e438a58bdb7738b7
+
+PODFILE CHECKSUM: 413cc55e74ce1d6d2321ea4ae8c98fa6e14e977e
+
+COCOAPODS: 1.9.3

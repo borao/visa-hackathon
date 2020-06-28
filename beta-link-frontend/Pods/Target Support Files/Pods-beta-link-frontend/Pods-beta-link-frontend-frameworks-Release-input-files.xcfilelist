@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-beta-link-frontend/Pods-beta-link-frontend-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CYLTabBarController/CYLTabBarController.framework
+${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework
+${BUILT_PRODUCTS_DIR}/StoryView/StoryView.framework

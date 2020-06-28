@@ -1,0 +1,6 @@
+framework module StoryView {
+  umbrella header "StoryView-umbrella.h"
+
+  export *
+  module * { export * }
+}

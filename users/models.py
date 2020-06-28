@@ -10,12 +10,12 @@ class Customer(models.Model):
     # a customer can only have one user,
     # and a user can only have one customer
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    street = models.CharField(max_length=100, blank=False)
-    city = models.CharField(max_length=50, blank=False)
-    state = models.CharField(max_length=50, blank=False)
-    zipcode = models.CharField(max_length=10, blank=False)
-    longtitude = models.CharField(max_length=100, blank=False)
-    latitude = models.CharField(max_length=100, blank=False)
+    street = models.CharField(max_length=100, blank=False, default='900 Metro Center Blvd')
+    city = models.CharField(max_length=50, blank=False, default='Foster City')
+    state = models.CharField(max_length=50, blank=False, default='CA')
+    zipcode = models.CharField(max_length=10, blank=False, default='zipcode_string')
+    longtitude = models.CharField(max_length=100, blank=False, default='-122.2763649')
+    latitude = models.CharField(max_length=100, blank=False, default='37.5592521')
     phone_number = models.IntegerField()
     profilePic = models.ImageField(default='minion.jpg', upload_to='profile_pics')
     distance = models.IntegerField(default=50,

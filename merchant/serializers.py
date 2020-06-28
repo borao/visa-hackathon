@@ -6,3 +6,4 @@ class MerchantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Merchant
         fields = '__all__'
+

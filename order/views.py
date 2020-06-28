@@ -1,5 +1,6 @@
 # Create your views here.
 import requests
+from django.db.models import Sum
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets
 from rest_framework.decorators import action
@@ -37,10 +38,24 @@ class OrderViewSet(viewsets.ModelViewSet):
         searchResult = self.queryset.filter(receiverID = receiverID).values()
         return HttpResponse(searchResult, content_type="application/json")
 
+    # call this by adding id into the url like http://localhost:8000/orders/giftSentBy/1
     @action(detail = False, url_path='giftSentBy/(?P<senderID>[^/.]+)')
     def giftSentBy(self, request, senderID):
         searchResult = self.queryset.filter(senderID = senderID).values()
         return HttpResponse(searchResult, content_type="application/json")
+
+    # call this by adding id into the url like http://localhost:8000/orders/giftForMerchant/1111111/
+    @action(detail = False, url_path='giftForMerchant/(?P<merchantID>[^/.]+)')
+    def giftForMerchant(self, request, merchantID):
+        searchResult = self.queryset.filter(merchantID = merchantID).values()
+        return HttpResponse(searchResult, content_type="application/json")
+
+    # call this by adding id into the url like http://localhost:8000/orders/totalGiftAmountByMerchant/1111111/
+    @action(detail = False, url_path='totalGiftAmountByMerchant/(?P<merchantID>[^/.]+)')
+    def totalGiftAmountByMerchant(self, request, merchantID):
+        total = self.queryset.filter(merchantID = merchantID).aggregate(Sum('giftAmount'))
+        return HttpResponse(float(total['giftAmount__sum']))
+
 
     # to redeem the gift, use patch method on detail view
     # {

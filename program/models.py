@@ -13,6 +13,7 @@ class Program(models.Model):
     programName = models.CharField(max_length=50, blank=False)
     description = models.TextField()
     goal = models.IntegerField(default=10)
+    reward = models.CharField(max_length=50)
 
     def __str__(self):
         return str(self.programName)
@@ -22,6 +23,8 @@ class UserToMerchant(models.Model):
     merchantID = models.ForeignKey(merchant_model.Merchant, on_delete=models.CASCADE, blank=False)
     curProgress = models.IntegerField(default = 0)
     programID = models.ForeignKey(Program, on_delete=models.CASCADE)
+    redeemed = models.BooleanField(default=False, blank=False)
+    redeemDate = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return "user " + str(self.userID) + " is enrolled in merchant " + str(self.merchantID) + "'s " + str(self.programID)

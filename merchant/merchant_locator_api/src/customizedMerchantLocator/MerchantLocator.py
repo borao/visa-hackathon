@@ -113,7 +113,9 @@ class MerchantLocator:
             "state": merchantInfo["merchantState"],
             "city": merchantInfo["merchantCity"],
             "category": merchantInfo["merchantCategoryCodeDesc"][0],
-            "distance": merchantInfo["distance"]
+            "distance": merchantInfo["distance"],
+            "longitude": merchantInfo["locationAddressLongitude"],
+            "latitude": merchantInfo["locationAddressLatitude"]
         }
 
         json_dump = json.dumps(a_merchant)
@@ -144,14 +146,14 @@ class MerchantLocator:
 
         return merchant_list
 
-    def postSearch_by_Name(self, distance, merchantName, longitude, latitude):
+    def postSearch_by_Name(self, start_idx, distance, merchantName, longitude, latitude):
         attrList = '"searchAttrList":{"distance": "' + str(distance) + \
-                   '","merchantName":[' + merchantName + \
-                   '],"merchantCountryCode":"840", "distanceUnit":"m", ' \
-                   '"longitude":"' + longitude + '", "latitude": "'+latitude+'"}}'
+                   '","merchantName":"' + merchantName + \
+                   '","merchantCountryCode":"840", "distanceUnit":"m", ' \
+                   '"longitude":"' + longitude + '", "latitude":"' + latitude + '"}}'
         payload = '{"responseAttrList":["GNLOCATOR"],' \
                   '"header":{"messageDateTime":"2020-06-22T22:41:17.903",' \
-                  '"startIndex":"0", "requestMessageId":"Request_001"},' + attrList
+                  '"startIndex":"' + str(start_idx) + '", "requestMessageId":"Request_001"},' + attrList
 
         print(payload)
 
@@ -160,12 +162,12 @@ class MerchantLocator:
         merchant_list = []
 
         if numRecords >= 1:
-            total = 10 if numRecords > 10 else numRecords
-            if numRecords > 10:
+            total = 1 if numRecords > 1 else numRecords
+            if numRecords > 1:
                 for i in range(total):
                     payload = '{"responseAttrList":["GNLOCATOR"],' \
                               '"header":{"messageDateTime":"2020-06-22T22:41:17.903",' \
-                              '"startIndex": "' + str(i) + '", "requestMessageId":"Request_001"},' + attrList
+                              '"startIndex": "' + str(start_idx) + '", "requestMessageId":"Request_001"},' + attrList
                     print(payload)
                     merchant_list.append(self.__testpostmerchant_locator(payload))
 

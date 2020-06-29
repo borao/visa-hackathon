@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'merchant',
     'order',
+    'program'
 ]
 
 MIDDLEWARE = [

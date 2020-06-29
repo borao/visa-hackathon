@@ -1,5 +1,7 @@
 from rest_framework import serializers
+
 from .models import Merchant
+
 
 class MerchantSerializer(serializers.ModelSerializer):
 

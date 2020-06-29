@@ -1,7 +1,8 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-from .models import  *
+from rest_framework.decorators import action
+
 from .serializers import *
+
 
 # Create your views here.
 

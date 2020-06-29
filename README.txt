@@ -19,5 +19,5 @@ python -m pip install Pillow
 
 # We'll also create an initial user named admin with a password of password123.
 # We'll authenticate as that user later in our example.
-python manage.py createsuperuser --email admin@example.com --username admin
+python manage.py createsuperuser --email betalink@example.com --username betalink --password password123
 

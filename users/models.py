@@ -1,12 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-=======
->>>>>>> 251db3f2c03f86b78b2c59f65fd36bc14214f168
 
 
 # Create your models here.

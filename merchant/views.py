@@ -25,7 +25,8 @@ class MerchantViewSet(viewsets.ModelViewSet):
                "OTHERS": '"5992", "5193", "7032", "7911", "7829", "7832", "7841"'} #OTHERS
         return mcc[category]
 
-    @action(detail=False, url_path='getMerchantByCategory/(?P<distance>[^/.]+)/(?P<merchantCategoryCode>[^/.]+)/(?P<merchantPostalCode>[^/.]+)')
+    @action(detail=False,
+            url_path='getMerchantByCategory/(?P<distance>[^/.]+)/(?P<merchantCategoryCode>[^/.]+)/(?P<merchantPostalCode>[^/.]+)')
     def getMerchantByCategory(self, request, distance, merchantCategoryCode, merchantPostalCode):
         """
         get merchange by category
@@ -46,25 +47,14 @@ class MerchantViewSet(viewsets.ModelViewSet):
         return HttpResponse(result, content_type="application/json")
 
 
-    @action(detail=True, methods=['post'])
-    def getMerchantByName(self, request, distance, merchantName, longitude, latitude):
-
-        merchant_by_name = MerchantLocator.MerchantLocator.postSearch_by_Name(distance=distance,
-                                                                              merchantName=merchantName,
-                                                                              latitude=latitude,
-                                                                              longitude=longitude)
-        for i in range(len(merchant_by_name)-1):
-            print(merchant_by_name[i])
-        return JsonResponse(merchant_by_name, safe=False)
-
-
-if __name__ == '__main__':
-
-    # distance = 50
-    # zipcode = "95131"
-    # merchantName = "starbucks"
-    # longitude = "-121.929163"
-    # latitude = "37.363922"
-    # choice = 1
-    MerchantViewSet(viewsets.ModelViewSet).getMerchantByCategory(50, "FAST_FOOD", "95131")
-    
+    # @action(detail=False,
+    #         url_path='getMerchantByName/(?P<distance>[^/.]+)/(?P<merchantName>[^/.]+)/(?P<longitude>[^/.]+)/(?P<latitude>[^/.]+)')
+    # def getMerchantByName(self, request, distance, merchantName, longitude, latitude):
+    #
+    #     obj = MerchantLocator.MerchantLocator()
+    #     p = Pool(5)
+    #     queries = list(map(lambda x: (x, distance, merchantName, longitude, latitude), range(10)))
+    #     print(queries)
+    #     result = p.starmap(obj.postSearch_by_Name, queries)
+    #     print(result)
+    #     return HttpResponse(result, content_type="application/json")

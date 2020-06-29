@@ -22,9 +22,7 @@ class Customer(models.Model):
                                    validators=[
                                        MaxValueValidator(100),
                                        MinValueValidator(1)])
-    merchantCategoryCode = models.CharField(max_length=100, blank=True)
-    merchantPostalCode = models.CharField(max_length=100, blank=True)
-
+    
     def __str__(self):
         return self.user.username
 

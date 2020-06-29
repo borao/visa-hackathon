@@ -13,13 +13,12 @@ class Merchant(models.Model):
     #     BEAUTY = 5 # COSMETIC AND BEAUTY STORE 5977, 7230, 7298,
     #     OTHERS = 6 # FLORIST 5992, 5193 # COMPUTER AND ELECTRONICS 5732 5734 # SPORTS ENTERTAINMENT 7032, 7911, 7829, 7832, 7841
 
-    merchantName = models.CharField(max_length=100, blank=False)
-    category = models.CharField(max_length=50, default='OTHERS')
+    # merchantName = models.CharField(max_length=100, blank=False)
+    # category = models.CharField(max_length=50, default='OTHERS')
     # hours = models.CharField(max_length=100)
     merchantID = models.CharField(primary_key=True, max_length=200)
-    # TODO: check how bank account works with Visa payment
+    # TODO: check how bank account works with Visa payment: No bank account
     # bankAccount = models.CharField(max_length=200, blank=True)
-    # TODO: include storeID
 
 
     def __str__(self):

@@ -14,11 +14,11 @@
 		BD2FF76524A455A300EE422D /* MerchantPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF75D24A455A300EE422D /* MerchantPageViewController.swift */; };
 		BD2FF76624A455A300EE422D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF75E24A455A300EE422D /* ProfileViewController.swift */; };
 		BD2FF76724A455A300EE422D /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF75F24A455A300EE422D /* FriendTableViewCell.swift */; };
-		BD2FF76824A455A300EE422D /* GiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76024A455A300EE422D /* GiftViewController.swift */; };
+		BD2FF76824A455A300EE422D /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76024A455A300EE422D /* FriendListViewController.swift */; };
 		BD2FF76924A455A300EE422D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76124A455A300EE422D /* HomeViewController.swift */; };
 		BD2FF76A24A455A300EE422D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76224A455A300EE422D /* Utils.swift */; };
+		BD4DFFA424AA63C30030B1AA /* SelectAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4DFFA324AA63C30030B1AA /* SelectAmountViewController.swift */; };
 		BD6E789C24A73DC200E420A8 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = BD6E789B24A73DC200E420A8 /* db.sqlite3 */; };
-		BD796B1824A7EE90004246CB /* FlatColors.json in Resources */ = {isa = PBXBuildFile; fileRef = BD796B1724A7EE90004246CB /* FlatColors.json */; };
 		BD84D76224A44FE0007D563E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD84D76124A44FE0007D563E /* AppDelegate.swift */; };
 		BD84D76424A44FE0007D563E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD84D76324A44FE0007D563E /* SceneDelegate.swift */; };
 		BD84D76724A44FE0007D563E /* Beta_Link.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BD84D76524A44FE0007D563E /* Beta_Link.xcdatamodeld */; };
@@ -43,11 +43,11 @@
 		BD2FF75D24A455A300EE422D /* MerchantPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MerchantPageViewController.swift; sourceTree = "<group>"; };
 		BD2FF75E24A455A300EE422D /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BD2FF75F24A455A300EE422D /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
-		BD2FF76024A455A300EE422D /* GiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiftViewController.swift; sourceTree = "<group>"; };
+		BD2FF76024A455A300EE422D /* FriendListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 		BD2FF76124A455A300EE422D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD2FF76224A455A300EE422D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		BD4DFFA324AA63C30030B1AA /* SelectAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAmountViewController.swift; sourceTree = "<group>"; };
 		BD6E789B24A73DC200E420A8 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
-		BD796B1724A7EE90004246CB /* FlatColors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FlatColors.json; sourceTree = "<group>"; };
 		BD84D75E24A44FE0007D563E /* beta-link-frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beta-link-frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD84D76124A44FE0007D563E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD84D76324A44FE0007D563E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,8 +102,6 @@
 				BDE0284024A47ECA002760A3 /* CategoryViewController.swift */,
 				BD2FF75D24A455A300EE422D /* MerchantPageViewController.swift */,
 				BDE0283C24A47105002760A3 /* LeadershipBoardViewController.swift */,
-				BDE0283E24A476F8002760A3 /* GiftSendingViewController.swift */,
-				BD0C83C724A5123B00228AAA /* GiftSentViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -112,7 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				BD2FF75F24A455A300EE422D /* FriendTableViewCell.swift */,
-				BD2FF76024A455A300EE422D /* GiftViewController.swift */,
+				BD2FF76024A455A300EE422D /* FriendListViewController.swift */,
+				BD4DFFA324AA63C30030B1AA /* SelectAmountViewController.swift */,
+				BDE0283E24A476F8002760A3 /* GiftSendingViewController.swift */,
+				BD0C83C724A5123B00228AAA /* GiftSentViewController.swift */,
 			);
 			path = Gift;
 			sourceTree = "<group>";
@@ -152,7 +153,6 @@
 		BD84D75524A44FE0007D563E = {
 			isa = PBXGroup;
 			children = (
-				BD796B1724A7EE90004246CB /* FlatColors.json */,
 				BD6E789B24A73DC200E420A8 /* db.sqlite3 */,
 				BD84D76024A44FE0007D563E /* beta-link-frontend */,
 				BD84D75F24A44FE0007D563E /* Products */,
@@ -255,7 +255,6 @@
 				BD84D76E24A44FE2007D563E /* Preview Assets.xcassets in Resources */,
 				BD84D76B24A44FE2007D563E /* Assets.xcassets in Resources */,
 				BD6E789C24A73DC200E420A8 /* db.sqlite3 in Resources */,
-				BD796B1824A7EE90004246CB /* FlatColors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,10 +319,11 @@
 				BD2FF76524A455A300EE422D /* MerchantPageViewController.swift in Sources */,
 				BDE0283D24A47105002760A3 /* LeadershipBoardViewController.swift in Sources */,
 				BD2FF76A24A455A300EE422D /* Utils.swift in Sources */,
+				BD4DFFA424AA63C30030B1AA /* SelectAmountViewController.swift in Sources */,
 				BD2FF76924A455A300EE422D /* HomeViewController.swift in Sources */,
 				BDAE4C0A24A703430005A215 /* Database.swift in Sources */,
 				BD2FF76624A455A300EE422D /* ProfileViewController.swift in Sources */,
-				BD2FF76824A455A300EE422D /* GiftViewController.swift in Sources */,
+				BD2FF76824A455A300EE422D /* FriendListViewController.swift in Sources */,
 				BD84D76424A44FE0007D563E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -71,32 +71,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A1D72AC9-E953-4E9F-8C73-09BC8459763E"
+            uuid = "7AE5377E-613F-4CD8-86B1-552ECEEBD573"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "beta-link-frontend/Home/CategoryViewController.swift"
+            filePath = "beta-link-frontend/Gift/FriendListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5506A05E-47ED-44FD-8D95-C6005607285D"
+            uuid = "953145C8-07ED-4B45-88E9-9116E1AF88A2"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "beta-link-frontend/Home/CategoryViewController.swift"
+            filePath = "beta-link-frontend/Gift/SelectAmountViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "pushSendingPageVC(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

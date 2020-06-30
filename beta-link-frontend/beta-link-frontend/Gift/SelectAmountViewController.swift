@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectAmountViewController: UIViewController {
+class SelectAmountViewController: UIViewController, CustomVC {
     
     /* - MARK: Data input */
     var userName: String?
@@ -26,18 +26,9 @@ class SelectAmountViewController: UIViewController {
 
         frameWidth = self.view.frame.width
         self.view.backgroundColor = .white
-//        let scrollView = UIScrollView()
-//        scrollView.backgroundColor = .white
-//        scrollView.isUserInteractionEnabled = true
-//
-//        self.view.addSubview(scrollView)
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-//        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-//        scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-//        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
 
-        self.view.addSubview(generateVisaImage())
+        self.view.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
+        currentHeight += 50
         currentHeight += spacer * 3
         for i in 1...3 {
             self.view.addSubview(generateAmountLabel(amount1: 5 * i, amount2: 10 * i))
@@ -75,7 +66,7 @@ class SelectAmountViewController: UIViewController {
         label2.addGestureRecognizer(tapRecognizer2)
         label2.translatesAutoresizingMaskIntoConstraints = false
         
-        let container = generateEvenContainerView(subViews: [label, label2], x: 20, y: currentHeight, width: frameWidth! - 40, height: 140, verticleSpacing: 10, horizontalSpacing: 30)
+        let container = generateEvenContainerView(subViews: [label, label2], x: 20, y: currentHeight, width: frameWidth! - 40, height: 140, verticleSpacing: 10, horizontalSpacing: 30, sender: self)
         container.backgroundColor = .white
         container.isUserInteractionEnabled = true
         
@@ -93,47 +84,8 @@ class SelectAmountViewController: UIViewController {
     }
     
     /* - MARK: UI helper functions */
-    // This function generate uneven container view, UPDATING currentHeight in the end
-    func generateVisaImage() -> UIImageView {
-        let img = UIImage(named: "visa")
-        let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
-        currentHeight += 50
-        return imgView
-    }
     
-    // Generate Evenly distributed container view
-    func generateEvenContainerView(subViews: [UIView], x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, verticleSpacing: CGFloat, horizontalSpacing: CGFloat) -> UIView {
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        let container = UIView(frame: frame)
-        container.clipsToBounds = true // this will make sure its children do not go out of the boundary
-        
-        for v in subViews {
-            container.addSubview(v)
-        }
-        
-        let numElem: CGFloat = CGFloat(subViews.count)
-        let eachWidth: CGFloat = (width - horizontalSpacing * (numElem - 1)) / numElem
-        
-        for i in 0..<subViews.count {
-            let elem = subViews[i]
-            elem.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-            elem.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-            
-            if (i == 0) {
-                elem.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-            } else {
-                elem.leadingAnchor.constraint(equalTo: subViews[i - 1].trailingAnchor, constant: horizontalSpacing).isActive = true
-            }
-            
-            if (i == subViews.count - 1) {
-                elem.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-            } else {
-                elem.widthAnchor.constraint(equalToConstant: eachWidth).isActive = true
-            }
-        }
-        
-        currentHeight += height + verticleSpacing
-        return container
+    func incrementBySpacer(h: CGFloat) {
+        currentHeight += h
     }
 }

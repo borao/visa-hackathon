@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class CategoryViewController: UIViewController {
+class CategoryViewController: UIViewController, UIScrollViewDelegate, UISearchBarDelegate, CustomVC {
     /* - MARK: Data input */
     var category: MerchantCaterogy?
     var merchants: [Merchant]?
@@ -20,6 +20,14 @@ class CategoryViewController: UIViewController {
     var currentHeight: CGFloat = 0
     var frameWidth: CGFloat?
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.view.endEditing(true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         frameWidth = self.view.frame.width
@@ -28,22 +36,38 @@ class CategoryViewController: UIViewController {
         scrollView.isUserInteractionEnabled = true
         
         self.view.addSubview(scrollView)
+        scrollView.delegate = self
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         
-        scrollView.addSubview(generateVisaImage())
+        scrollView.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
+        currentHeight += 50
+        scrollView.addSubview(generateSearchBar())
         scrollView.addSubview(generateMap())
-        scrollView.addSubview(generateSeparationLine())
+        scrollView.addSubview(generateSeparationLine(sender: self))
         for i in 0 ..< self.merchants!.count {
-            scrollView.addSubview(generateRecommendation(imgName: "tfl", merchantName: self.merchants![i].name, merchantHour: self.merchants![i].hour))
+            scrollView.addSubview(generateRecommendation(imgName: "tfl", merchantName: self.merchants![i].name, merchantHour: "Hours: Sat - Sun, 11:00AM - 5:00PM"))
         }
         
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
         
         // Do any additional setup after loading the view.
+    }
+    func generateSearchBar() -> UISearchBar {
+        let bar = UISearchBar()
+        let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
+        bar.frame = frame
+        bar.barTintColor = visaBlue
+        bar.searchTextField.backgroundColor = .white
+        bar.resignFirstResponder()
+        bar.isUserInteractionEnabled = true
+        bar.delegate = self
+        bar.becomeFirstResponder()
+        currentHeight += 50 + spacer
+        return bar
     }
     
     func generateMap() -> MKMapView {
@@ -76,7 +100,7 @@ class CategoryViewController: UIViewController {
     }
     
     func generateRecommendation(imgName: String, merchantName: String, merchantHour: String) -> UIView {
-        let container = generateUnevenContainerView(left: generateRecommendImage(name: "tfl"), right: generateRecommendLabel(merchantName: merchantName), ratio: 0.4, x: 30, y: currentHeight, width: frameWidth! - 60, height: 100, spacing: spacer)
+        let container = generateUnevenContainerView(left: generateRecommendImage(name: "tfl"), right: generateRecommendLabel(merchantName: merchantName), ratio: 0.4, x: 30, y: currentHeight, width: frameWidth! - 60, height: 100, spacing: spacer, sender: self)
         container.isUserInteractionEnabled = true
         let tapRecognizer = MerchantTappedGestureRecognizer(target: self, action: #selector(CategoryViewController.pushMerchantPageVC(sender:)))
         tapRecognizer.merchant = merchantLookUp(merchantName: merchantName)
@@ -111,14 +135,7 @@ class CategoryViewController: UIViewController {
         let categoryLabel = UILabel()
         categoryLabel.backgroundColor = visaBlue
         categoryLabel.textColor = visaOrange
-        switch self.category! {
-        case .coffee:
-            categoryLabel.text = "   Coffee & Tea"
-        case .fastFood:
-            categoryLabel.text = "   Fast Food"
-        default:
-            categoryLabel.text = "  Not yet implemented"
-        }
+        categoryLabel.text = "  " + categoryToString[self.category!]!
         categoryLabel.font = UIFont(name: categoryLabel.font.fontName, size: 15)
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -153,56 +170,9 @@ class CategoryViewController: UIViewController {
     
     /* - MARK: Some helper functions */
     // This function generate uneven container view, UPDATING currentHeight in the end
-    func generateVisaImage() -> UIImageView {
-        let img = UIImage(named: "visa")
-        let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
-        currentHeight += 50
-        return imgView
-    }
     
-    func generateUnevenContainerView(left: UIView, right: UIView, ratio: CGFloat, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, spacing: CGFloat) -> UIView {
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        let container = UIView(frame: frame)
-        container.backgroundColor = visaBlue
-        container.clipsToBounds = true // this will make sure its children do not go out of the boundary
-        
-        container.addSubview(left)
-        container.addSubview(right)
-
-        left.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        left.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-        left.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-        left.widthAnchor.constraint(equalToConstant: width * ratio).isActive = true
-
-        right.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-        right.leadingAnchor.constraint(equalTo: left.trailingAnchor).isActive = true
-        right.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        right.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-        
-        currentHeight += height + spacing
-
-        return container
+    func incrementBySpacer(h: CGFloat) {
+        currentHeight += h
     }
-    
-    func generateSeparationLine() -> UILabel {
-        let color = visaBlue
-        let frame = CGRect(x: 100, y: currentHeight, width: frameWidth! - 200, height: 3)
-        let label = UILabel(frame: frame)
-        label.backgroundColor = color
-        currentHeight += 5 + spacer
-        return label
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

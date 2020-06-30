@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MerchantPageViewController: UIViewController {
+class MerchantPageViewController: UIViewController, CustomVC {
     
     /* - MARK: Data input */
     var userName: String? = nil
@@ -16,7 +16,6 @@ class MerchantPageViewController: UIViewController {
     
     var merchant: Merchant?
     var merchantWeekendHour: String? = "Hours: Sat - Sun, 11:00AM - 5:00PM"
-    var merchantAddress: String? = "2700 Hearst Ave, Berkeley, CA, 94608"
     
 
     /* - MARK: User Interface */
@@ -31,10 +30,14 @@ class MerchantPageViewController: UIViewController {
         self.view.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
         
-        self.view.addSubview(generateVisaImage())
-        self.view.addSubview(generateMerchantPicture(pictureName: "tfl"))
+        self.view.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
+        currentHeight += 50
+        currentHeight += spacer
         self.view.addSubview(generateSectionHeaderLabel(text: self.merchant!.name))
-        self.view.addSubview(generateMerchantInfo(category: "  " + categoryToString[self.merchant!.category]!, hour: self.merchant!.hour, address: merchantAddress!))
+        self.view.addSubview(generateMerchantPicture(pictureName: "tfl"))
+        currentHeight += spacer
+        self.view.addSubview(generateNumGifted())
+        self.view.addSubview(generateMerchantInfo(category: categoryToString[self.merchant!.category]!, hour: "Hours: Sat - Sun, 11:00AM - 5:00PM", address: self.merchant!.address + self.merchant!.city))
         self.view.addSubview(generateButtons())
     }
     
@@ -46,6 +49,15 @@ class MerchantPageViewController: UIViewController {
         imgView.image = UIImage(named: pictureName)
         
         currentHeight += frameWidth! - 60
+        return imgView
+    }
+    
+    func generateNumGifted() -> UIImageView {
+        let frame = CGRect(x: 240, y: currentHeight, width: frameWidth! - 240, height: 100)
+        let imgView = UIImageView(frame: frame)
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+        imgView.image = UIImage(named: "num_purchased")
         return imgView
     }
     
@@ -83,7 +95,7 @@ class MerchantPageViewController: UIViewController {
         stack.addArrangedSubview(label4)
 //        stack.translatesAutoresizingMaskIntoConstraints = false
         
-        stack.frame = CGRect(x: 10, y: currentHeight, width: frameWidth! - 70, height: 100)
+        stack.frame = CGRect(x: 20, y: currentHeight, width: 220, height: 100)
         currentHeight += 100 + spacer * 2
         return stack
     }
@@ -104,7 +116,7 @@ class MerchantPageViewController: UIViewController {
         button2.translatesAutoresizingMaskIntoConstraints = false
         button2.addTarget(self, action: #selector(MerchantPageViewController.leadershipButtonPressed(sender:)), for: .touchUpInside)
         
-        let view = generateEvenContainerView(subViews: [button1, button2], x: 10, y: currentHeight, width: frameWidth! - 20, height: 85, verticleSpacing: spacer, horizontalSpacing: 20)
+        let view = generateEvenContainerView(subViews: [button1, button2], x: 10, y: currentHeight, width: frameWidth! - 20, height: 85, verticleSpacing: spacer, horizontalSpacing: 20, sender: self)
         view.backgroundColor = .white
         view.isUserInteractionEnabled = true
         
@@ -129,59 +141,19 @@ class MerchantPageViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func generateVisaImage() -> UIImageView {
-        let img = UIImage(named: "visa")
-        let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
-        currentHeight += 50
-        return imgView
-    }
-    
-    // Generate Evenly distributed container view
-    func generateEvenContainerView(subViews: [UIView], x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, verticleSpacing: CGFloat, horizontalSpacing: CGFloat) -> UIView {
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        let container = UIView(frame: frame)
-        container.clipsToBounds = true // this will make sure its children do not go out of the boundary
-        
-        for v in subViews {
-            container.addSubview(v)
-        }
-        
-        let numElem: CGFloat = CGFloat(subViews.count)
-        let eachWidth: CGFloat = (width - horizontalSpacing * (numElem - 1)) / numElem
-        
-        for i in 0..<subViews.count {
-            let elem = subViews[i]
-            elem.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-            elem.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-            
-            if (i == 0) {
-                elem.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-            } else {
-                elem.leadingAnchor.constraint(equalTo: subViews[i - 1].trailingAnchor, constant: horizontalSpacing).isActive = true
-            }
-            
-            if (i == subViews.count - 1) {
-                elem.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-            } else {
-                elem.widthAnchor.constraint(equalToConstant: eachWidth).isActive = true
-            }
-        }
-        
-        currentHeight += height + verticleSpacing
-        
-        return container
-    }
-    
     func generateSectionHeaderLabel(text: String) -> UILabel {
         let frame = CGRect(x: 30, y: currentHeight, width: 200, height: 40)
         let label = UILabel(frame: frame)
         label.text = text
         label.backgroundColor = .white
-        label.textColor = .darkGray
+        label.textColor = visaBlue
         label.font = UIFont.boldSystemFont(ofSize: 23)
         currentHeight += 40
         return label
+    }
+    
+    func incrementBySpacer(h: CGFloat) {
+        currentHeight += h
     }
 
 }

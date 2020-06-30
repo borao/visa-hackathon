@@ -11,13 +11,35 @@ import SQLite
 
 var allMerchants: [Merchant] = []
 
+func classifyMerchant(cat: String) -> MerchantCaterogy {
+    if (cat.contains("restaurant")) {
+        return .food
+    } else if (cat.contains("cloth")) {
+        return .clothing
+    } else if (cat.contains("grocery")) {
+        return .grocery
+    } else if (cat.contains("beauty")) {
+        return .beauty
+    } else if (cat.contains("sport")) {
+        return .sport
+    } else {
+        return .other
+    }
+}
+
 class DatabaseHelper {
     var db: Connection?
 
     let usersTable = Table("merchant_merchant")
+    
     let merchantName = Expression<String>("merchantName")
-    let merchantCategory = Expression<Int>("category")
-    let merchantHour = Expression<String>("hours")
+    let merchantCategory = Expression<String>("category")
+    let merchantID = Expression<String>("merchantID")
+    let merchantCity = Expression<String>("city")
+    let merchantLongitude = Expression<String>("longitude")
+    let merchantLatitude = Expression<String>("latitude")
+    let merchantState = Expression<String>("state")
+    let merchantAddress = Expression<String>("streetAddress")
 
     init() {
         do {
@@ -35,10 +57,18 @@ class DatabaseHelper {
         do {
             let users = try self.db!.prepare(self.usersTable)
             for user in users {
-                let name = try user.get(self.merchantName)
-                let hour = try user.get(self.merchantHour)
-                let category = try user.get(self.merchantCategory)
-                allMerchants.append(Merchant(name: name, category: MerchantCaterogy(rawValue: category)!, hour: hour))
+                let name = try user.get(self.merchantName).lowercased()
+                let category = try user.get(self.merchantCategory).lowercased()
+                let id = try user.get(self.merchantID)
+                let city = try user.get(self.merchantCity).lowercased()
+                let state = try user.get(self.merchantState)
+                let lonTemp = try user.get(self.merchantLongitude)
+                let latTemp = try user.get(self.merchantLatitude)
+                let addr = try user.get(self.merchantAddress).lowercased()
+                let lonx = try Double(lonTemp) ?? -122.2763649
+                let latx = try Double(latTemp) ?? 37.5592521
+                
+                allMerchants.append(Merchant(name: name, category: classifyMerchant(cat: category), id: id, lon: lonx, lat: latx, state: state, address: addr, city: city))
             }
             print(allMerchants)
         } catch {

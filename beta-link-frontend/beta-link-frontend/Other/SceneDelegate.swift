@@ -36,6 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func viewControllers() -> [UINavigationController]{
         let home = UINavigationController(rootViewController: HomeViewController())
+        home.navigationBar.tintColor = visaBlue
         let profile =   UINavigationController(rootViewController: ProfileViewController())
         let viewControllers = [home, profile]
         

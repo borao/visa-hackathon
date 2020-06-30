@@ -17,6 +17,7 @@
 		BD2FF76824A455A300EE422D /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76024A455A300EE422D /* FriendListViewController.swift */; };
 		BD2FF76924A455A300EE422D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76124A455A300EE422D /* HomeViewController.swift */; };
 		BD2FF76A24A455A300EE422D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76224A455A300EE422D /* Utils.swift */; };
+		BD32F10B24AB9D3B00107966 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD32F10A24AB9D3B00107966 /* EndPoint.swift */; };
 		BD4DFFA424AA63C30030B1AA /* SelectAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4DFFA324AA63C30030B1AA /* SelectAmountViewController.swift */; };
 		BD6E789C24A73DC200E420A8 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = BD6E789B24A73DC200E420A8 /* db.sqlite3 */; };
 		BD84D76224A44FE0007D563E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD84D76124A44FE0007D563E /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 		BD2FF76024A455A300EE422D /* FriendListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 		BD2FF76124A455A300EE422D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BD2FF76224A455A300EE422D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		BD32F10A24AB9D3B00107966 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BD4DFFA324AA63C30030B1AA /* SelectAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAmountViewController.swift; sourceTree = "<group>"; };
 		BD6E789B24A73DC200E420A8 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		BD84D75E24A44FE0007D563E /* beta-link-frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beta-link-frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,10 +134,11 @@
 			isa = PBXGroup;
 			children = (
 				BD2FF76224A455A300EE422D /* Utils.swift */,
+				BDAE4C0924A703430005A215 /* Database.swift */,
+				BD32F10A24AB9D3B00107966 /* EndPoint.swift */,
 				BD2FF75C24A455A300EE422D /* MainTabBarViewController.swift */,
 				BD2FF75B24A455A300EE422D /* PlusButtonSubclass.swift */,
 				BDBCE21E24A680D2004C5362 /* UserInfo.swift */,
-				BDAE4C0924A703430005A215 /* Database.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,13 +177,13 @@
 		BD84D76024A44FE0007D563E /* beta-link-frontend */ = {
 			isa = PBXGroup;
 			children = (
+				BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */,
+				BD84D77224A44FE2007D563E /* Info.plist */,
 				BD2FF79224A466CD00EE422D /* Other */,
 				BD2FF79124A466C300EE422D /* Model */,
 				BD2FF78F24A4669C00EE422D /* Gift */,
 				BD2FF78E24A4667E00EE422D /* Home */,
 				BD2FF79024A466B200EE422D /* Profile */,
-				BD84D77224A44FE2007D563E /* Info.plist */,
-				BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */,
 				BD84D76C24A44FE2007D563E /* Preview Content */,
 			);
 			path = "beta-link-frontend";
@@ -340,6 +343,7 @@
 				BD2FF76424A455A300EE422D /* MainTabBarViewController.swift in Sources */,
 				BD2FF76524A455A300EE422D /* MerchantPageViewController.swift in Sources */,
 				BDE0283D24A47105002760A3 /* LeadershipBoardViewController.swift in Sources */,
+				BD32F10B24AB9D3B00107966 /* EndPoint.swift in Sources */,
 				BD2FF76A24A455A300EE422D /* Utils.swift in Sources */,
 				BD4DFFA424AA63C30030B1AA /* SelectAmountViewController.swift in Sources */,
 				BD2FF76924A455A300EE422D /* HomeViewController.swift in Sources */,

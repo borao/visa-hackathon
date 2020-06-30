@@ -8,7 +8,8 @@
 
 import UIKit
 
-class FriendListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class FriendListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CustomVC {
+    
     
     /* - MARK: Data input */
     var friendNames: [String]? = ["Bob the minion", "Kevin the minion", "Carl the minion", "Alice the minion"]
@@ -25,10 +26,8 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         frameWidth = self.view.frame.width
         self.view.backgroundColor = .white
-        self.view.addSubview(generateVisaImage())
-//        let tapRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
-//        self.view.addGestureRecognizer(tapRecognizer)
-//        self.view.addSubview(generateSearchBar())
+        self.view.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
+        currentHeight += 50
         let tableFrame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: self.view.frame.height - currentHeight - 20)
         let table = UITableView(frame: tableFrame)
         table.delegate = self
@@ -36,18 +35,6 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
         table.isUserInteractionEnabled = true
         table.register(FriendTableViewCell.self, forCellReuseIdentifier: "friendCell")
         self.view.addSubview(table)
-        
-//        table.translatesAutoresizingMaskIntoConstraints = false
-//
-//        table.topAnchor.constraint(equalTo:view.topAnchor).isActive = true
-//        table.leftAnchor.constraint(equalTo:view.leftAnchor).isActive = true
-//        table.rightAnchor.constraint(equalTo:view.rightAnchor).isActive = true
-//        table.bottomAnchor.constraint(equalTo:view.bottomAnchor).isActive = true
-//
-//        table.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        table.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//        table.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//        table.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         // Do any additional setup after loading the view.
     }
     
@@ -90,15 +77,6 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    
-    func generateVisaImage() -> UIImageView {
-        let img = UIImage(named: "visa")
-        let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
-        currentHeight += 50
-        return imgView
-    }
-    
     func generateSearchBar() -> UISearchBar {
         let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
         let bar = UISearchBar(frame: frame)
@@ -109,5 +87,9 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
         bar.becomeFirstResponder()
         currentHeight += 50 + spacer
         return bar
+    }
+    
+    func incrementBySpacer(h: CGFloat) {
+        currentHeight += h
     }
 }

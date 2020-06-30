@@ -8,6 +8,7 @@
 
 import UIKit
 import StoryView
+import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     /* - MARK: Data input */
@@ -46,6 +47,7 @@ class ProfileViewController: UIViewController {
         scrollView.addSubview(generateSeparationLine())
         scrollView.addSubview(generateSectionHeaderLabel(text: "Transaction History"))
         scrollView.addSubview(generateViewMoreButton(text: "View Transaction History"))
+        scrollView.addSubview(generateGoogleSigninButton())
         
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
         // Do any additional setup after loading the view.
@@ -158,6 +160,19 @@ class ProfileViewController: UIViewController {
         container.backgroundColor = .white
         
         return container
+    }
+    
+    func generateGoogleSigninButton() -> GIDSignInButton {
+        let button = GIDSignInButton(frame: CGRect(x: 40, y: currentHeight, width: frameWidth! - 80, height: 50))
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+
+        // Automatically sign in the user.
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        
+        currentHeight += 50
+        
+        return button
     }
     
 /* - MARK: Some helper functions */

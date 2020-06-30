@@ -27,6 +27,7 @@
 		BD84D77124A44FE2007D563E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD84D76F24A44FE2007D563E /* LaunchScreen.storyboard */; };
 		BDAE4C0A24A703430005A215 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAE4C0924A703430005A215 /* Database.swift */; };
 		BDBCE21F24A680D2004C5362 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBCE21E24A680D2004C5362 /* UserInfo.swift */; };
+		BDCF3E6E24AAC4A0003EE7BA /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */; };
 		BDE0283D24A47105002760A3 /* LeadershipBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE0283C24A47105002760A3 /* LeadershipBoardViewController.swift */; };
 		BDE0283F24A476F8002760A3 /* GiftSendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE0283E24A476F8002760A3 /* GiftSendingViewController.swift */; };
 		BDE0284124A47ECA002760A3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE0284024A47ECA002760A3 /* CategoryViewController.swift */; };
@@ -58,6 +59,7 @@
 		BD84D77224A44FE2007D563E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDAE4C0924A703430005A215 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		BDBCE21E24A680D2004C5362 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		BDE0283C24A47105002760A3 /* LeadershipBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadershipBoardViewController.swift; sourceTree = "<group>"; };
 		BDE0283E24A476F8002760A3 /* GiftSendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftSendingViewController.swift; sourceTree = "<group>"; };
 		BDE0284024A47ECA002760A3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				BD2FF78E24A4667E00EE422D /* Home */,
 				BD2FF79024A466B200EE422D /* Profile */,
 				BD84D77224A44FE2007D563E /* Info.plist */,
+				BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */,
 				BD84D76C24A44FE2007D563E /* Preview Content */,
 			);
 			path = "beta-link-frontend";
@@ -203,6 +206,7 @@
 				BD84D75B24A44FE0007D563E /* Frameworks */,
 				BD84D75C24A44FE0007D563E /* Resources */,
 				5EF92FD666F658DD4A943EB1 /* [CP] Embed Pods Frameworks */,
+				0DF2FB7CD4254D7A938415EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,6 +257,7 @@
 			files = (
 				BD84D77124A44FE2007D563E /* LaunchScreen.storyboard in Resources */,
 				BD84D76E24A44FE2007D563E /* Preview Assets.xcassets in Resources */,
+				BDCF3E6E24AAC4A0003EE7BA /* credentials.plist in Resources */,
 				BD84D76B24A44FE2007D563E /* Assets.xcassets in Resources */,
 				BD6E789C24A73DC200E420A8 /* db.sqlite3 in Resources */,
 			);
@@ -261,6 +266,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0DF2FB7CD4254D7A938415EE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-beta-link-frontend/Pods-beta-link-frontend-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-beta-link-frontend/Pods-beta-link-frontend-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-beta-link-frontend/Pods-beta-link-frontend-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1E8CB35608780B59F202228A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

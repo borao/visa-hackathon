@@ -33,18 +33,10 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, url_path='getLeaderboard/(?P<merchantID>[^/.]+)')
     def getLeaderboard(self, request, merchantID):
-        orders = Order.objects.values_list('merchantID_id', 'senderID_id')
-        gifts = Counter()
-        for merchant, sender in orders:
-            if merchant == merchantID:
-                if sender in gifts:
-                    gifts[sender] += 1
-                else:
-                    gifts[sender] = 1
-        print(gifts.most_common())
-        # Returns a list of tuples with the first element in the tuple
-        # being the userID and the second element being the number of times they've donated
-        return HttpResponse(gifts.most_common())
+        leaders = self.queryset.filter(merchantID = merchantID).select_related().values('senderID_id__user__username', 'senderID_id__profilePic')\
+            .annotate(totalNumberSent = Count('senderID')).order_by('-totalNumberSent')[:3]
+
+        return HttpResponse(leaders)
 
     @action(detail=False, methods=['post'])
     def purchaseGift(self, request):

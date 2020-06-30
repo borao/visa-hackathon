@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "send_a_gift.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -10,12 +11,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "forward_arrow.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

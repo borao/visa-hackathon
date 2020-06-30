@@ -118,8 +118,7 @@ class MerchantLocator:
             "latitude": merchantInfo["locationAddressLatitude"]
         }
 
-        json_dump = json.dumps(a_merchant)
-        return json_dump
+        return a_merchant
 
     def postSearch_by_Category(self, start_idx, distance, merchantCategoryCode, zipcode):
         attrList = '"searchAttrList":{"distance": "' + str(distance) + \
@@ -172,48 +171,6 @@ class MerchantLocator:
                     merchant_list.append(self.__testpostmerchant_locator(payload))
 
         return merchant_list
-
-
-# if __name__ == '__main__':
-#     obj = MerchantLocator()
-#
-#     distance = 50
-#     merchantName = "Starbucks"
-#     longitude = -121.929163
-#     latitude = 37.363922
-#     startIndex = 0
-#     merchantCategoryCode = '"5812","5814"' # ["5812", "5411","5462","5814","5192","5300","5262"]
-#
-#     attrList = '"searchAttrList":{"distance": "' + str(distance) + \
-#                '","merchantCategoryCode":[' + merchantCategoryCode + \
-#                '],"merchantCountryCode":"840", "distanceUnit":"m", "merchantPostalCode":"95131"}}'
-#     payload = '{"responseAttrList":["GNLOCATOR"],' \
-#               '"header":{"messageDateTime":"2020-06-22T22:41:17.903",' \
-#               '"startIndex":"0", "requestMessageId":"Request_001"},' + attrList
-#
-#     numRecords = obj.numRecordMatched(payload)
-#
-#     payload_list = []
-#
-#
-#     if numRecords >= 1:
-#         if numRecords > 10:
-#             for i in range(10):
-#                 payload = '{"responseAttrList":["GNLOCATOR"],' \
-#                   '"header":{"messageDateTime":"2020-06-22T22:41:17.903",' \
-#                   '"startIndex": "' + str(i) + '", "requestMessageId":"Request_001"},' + attrList
-#                 print(payload)
-#                 payload_list.append(obj.postmerchant_locator(payload))
-#         else:
-#             for i in range(numRecords-1):
-#                 payload = '{"responseAttrList":["GNLOCATOR"],' \
-#                           '"header":{"messageDateTime":"2020-06-22T22:41:17.903",' \
-#                           '"startIndex": "' + str(i) + '", "requestMessageId":"Request_001"},' + attrList
-#                 print(payload)
-#                 payload_list.append(obj.postmerchant_locator(payload))
-#
-#     for i in range(10):
-#         print(payload_list[i] + '\n')
 
 
 # ----------------------------------------------------------------------------------------------------------------------

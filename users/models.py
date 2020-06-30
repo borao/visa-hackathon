@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -17,11 +18,8 @@ class Customer(models.Model):
     longtitude = models.CharField(max_length=100, blank=False, default='-122.2763649')
     latitude = models.CharField(max_length=100, blank=False, default='37.5592521')
     phone_number = models.IntegerField(blank=True)
-    profilePic = models.ImageField(default='minion.jpg', upload_to='profile_pics')
-    distance = models.IntegerField(default=50,
-                                   validators=[
-                                       MaxValueValidator(100),
-                                       MinValueValidator(1)])
+    profilePic = models.ImageField(default='minion.jpeg', upload_to='profile_pics')
+
 
     def __str__(self):
         return self.user.username

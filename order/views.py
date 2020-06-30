@@ -4,6 +4,13 @@ from datetime import timedelta, datetime
 from django.db.models import Sum
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets
+from .models import Order
+from .serializers import OrderSerializer
+from rest_framework.decorators import action
+from django.http import HttpResponse
+import requests
+from collections import Counter
+from django.db.models import Count
 from rest_framework.decorators import action
 from rest_framework.utils import json
 
@@ -13,6 +20,7 @@ from .serializers import OrderSerializer
 
 QRCODE_API_ENDPOINT = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data='
 
+
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
@@ -20,8 +28,23 @@ class OrderViewSet(viewsets.ModelViewSet):
     @action(detail = True, methods=['get'])
     def getQRCode(self, request, pk):
         requestUrl = QRCODE_API_ENDPOINT + pk
-        qrCode = requests.get(url = requestUrl)
+        qrCode = requests.get(url=requestUrl)
         return HttpResponse(qrCode.content, content_type="image/png")
+
+    @action(detail=False, url_path='getLeaderboard/(?P<merchantID>[^/.]+)')
+    def getLeaderboard(self, request, merchantID):
+        orders = Order.objects.values_list('merchantID_id', 'senderID_id')
+        gifts = Counter()
+        for merchant, sender in orders:
+            if merchant == merchantID:
+                if sender in gifts:
+                    gifts[sender] += 1
+                else:
+                    gifts[sender] = 1
+        print(gifts.most_common())
+        # Returns a list of tuples with the first element in the tuple
+        # being the userID and the second element being the number of times they've donated
+        return HttpResponse(gifts.most_common())
 
     @action(detail=False, methods=['post'])
     def purchaseGift(self, request):

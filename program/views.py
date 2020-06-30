@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -50,3 +51,9 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
             serializer.save(curProgress= program.values_list('curProgress',flat=True)[0] + serializer.validated_data['curProgress'])
         else:
             serializer.save()
+
+    # http://localhost:8000/programs/enrollment/getFavoriteStore/1/
+    @action(detail=False, url_path='getFavoriteStore/(?P<userID>[^/.]+)')
+    def getFavoriteStore(self, request, userID):
+        stores = self.queryset.filter(userID=userID).select_related().values('userID', 'merchantID', 'merchantID_id__profilePic').annotate(totalPoints=Sum('curProgress')).order_by('-totalPoints')[:10]
+        return HttpResponse(stores)

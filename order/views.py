@@ -61,23 +61,23 @@ class OrderViewSet(viewsets.ModelViewSet):
     # http://localhost:8000/orders/totalGiftAmountByMerchant/1111111/
     @action(detail = False, url_path='totalGiftAmountByMerchant/(?P<merchantID>[^/.]+)')
     def totalGiftAmountByMerchant(self, request, merchantID):
-        total = self.queryset.filter(merchantID = merchantID).aggregate(Sum('giftAmount'))
-        return HttpResponse(float(total['giftAmount__sum']))
+        total = float(self.queryset.filter(merchantID = merchantID).aggregate(Sum('giftAmount'))['giftAmount__sum'] or 0)
+        return HttpResponse(total)
 
     # http://localhost:8000/orders/userImpact/1/
     @action(detail = False, url_path='userImpact/(?P<userID>[^/.]+)')
     def userImpact(self, request, userID):
 
         sevenDaysAgo = (datetime.now() - timedelta(days = 7)).date()
-        numberGiftSentThisWeek = len(self.queryset.filter(senderID = userID).filter(date_ordered__gt=sevenDaysAgo))
+        numberGiftSentThisWeek = self.queryset.filter(senderID = userID).filter(date_ordered__gt=sevenDaysAgo).count()
 
         giftReceivedAggregatedThisWeek =  self.queryset.filter(receiverID = userID).filter(date_ordered__gt=sevenDaysAgo).aggregate(Sum('giftAmount'))
-        AmountReceivedThisWeek =  float(giftReceivedAggregatedThisWeek['giftAmount__sum'])
+        AmountReceivedThisWeek =  float(giftReceivedAggregatedThisWeek['giftAmount__sum'] or 0)
 
         giftSentAggregated = self.queryset.filter(senderID = userID).aggregate(Sum('giftAmount'))
-        amountGiftSent = float(giftSentAggregated['giftAmount__sum'])
+        amountGiftSent = float(giftSentAggregated['giftAmount__sum'] or 0)
 
-        numberGiftSent = len(self.queryset.filter(senderID = userID))
+        numberGiftSent = self.queryset.filter(senderID = userID).count()
 
         payload = {'numberGiftSentThisWeek': numberGiftSentThisWeek,
                    'AmountReceivedThisWeek': AmountReceivedThisWeek,

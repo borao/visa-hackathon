@@ -31,6 +31,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         qrCode = requests.get(url=requestUrl)
         return HttpResponse(qrCode.content, content_type="image/png")
 
+    # http://localhost:8000/orders/getLeaderboard/28937146/
     @action(detail=False, url_path='getLeaderboard/(?P<merchantID>[^/.]+)')
     def getLeaderboard(self, request, merchantID):
         leaders = self.queryset.filter(merchantID = merchantID).select_related().values('senderID_id__user__username', 'senderID_id__profilePic')\

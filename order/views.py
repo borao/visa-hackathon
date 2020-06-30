@@ -25,10 +25,8 @@ class OrderViewSet(viewsets.ModelViewSet):
         qrCode = requests.get(url=requestUrl)
         return HttpResponse(qrCode.content, content_type="image/png")
 
-    @action(detail=True, methods=['get'])
-    def getLeaderboard(self, request, pk):
-        # TODO Accept merchant as a parameter - using dummy merchant for now
-        merchantID = "12"
+    @action(detail=False, url_path='getLeaderboard/(?P<merchantID>[^/.]+)')
+    def getLeaderboard(self, request, merchantID):
         orders = Order.objects.values_list('merchantID_id', 'senderID_id')
         gifts = Counter()
         for merchant, sender in orders:

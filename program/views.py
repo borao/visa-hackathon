@@ -55,5 +55,5 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
     # http://localhost:8000/programs/enrollment/getFavoriteStore/1/
     @action(detail=False, url_path='getFavoriteStore/(?P<userID>[^/.]+)')
     def getFavoriteStore(self, request, userID):
-        stores = self.queryset.filter(userID=userID).select_related().values('userID', 'merchantID', 'merchantID_id__profilePic').annotate(totalPoints=Sum('curProgress')).order_by('-totalPoints')[:10]
+        stores = self.queryset.filter(userID=userID).select_related().values('userID', 'merchantID', 'merchantID_id__merchantName', 'merchantID_id__profilePic').annotate(totalPoints=Sum('curProgress')).order_by('-totalPoints')[:10]
         return HttpResponse(stores)

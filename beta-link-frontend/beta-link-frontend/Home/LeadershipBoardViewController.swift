@@ -11,7 +11,7 @@ import UIKit
 class LeadershipBoardViewController: UIViewController {
     
     /* - MARK: Data input */
-    var merchantName: String? = nil
+    var merchant: Merchant?
     
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
@@ -35,9 +35,9 @@ class LeadershipBoardViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         scrollView.addSubview(generateVisaImage())
-        scrollView.addSubview(generateSectionHeaderLabel(text: "Blue Angel Cafe"))
+//        scrollView.addSubview(generateSectionHeaderLabel(text: "Blue Angel Cafe"))
         scrollView.addSubview(generateMerchantPicture(pictureName: "tfl", merchantName: "Blue Angel Cafe"))
-        scrollView.addSubview(generateBoardTitle())
+        scrollView.addSubview(generateLeadershipTitlePicture())
         for i in (0...2) {
             scrollView.addSubview(generateNameCard(imgName: "minion", text1: "Carl the Minion", text2: "@carlminion", text3: "", font1: 20, font2: 14, font3: 1, labelName: "#" + String(i + 1), x: 10, y: currentHeight))
         }
@@ -60,16 +60,27 @@ class LeadershipBoardViewController: UIViewController {
             return imgView
     }
     
-    func generateBoardTitle() -> UILabel {
-        let label3 = UILabel()
-        label3.text = "Leadership Board\nTop Supporters of Small Merchants"
-        label3.font = UIFont.systemFont(ofSize: 20)
-        label3.textColor = visaOrange
-        label3.numberOfLines = 2
-        label3.frame = CGRect(x: 40, y: currentHeight, width: frameWidth! - 40, height: 50)
-        currentHeight += 50 + spacer
-        return label3
+    func generateLeadershipTitlePicture() -> UIImageView {
+            let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 75)
+            let imgView = UIImageView(frame: frame)
+            imgView.contentMode = .scaleToFill
+            imgView.clipsToBounds = true
+            imgView.image = UIImage(named: "leaderboard_title")
+            
+            currentHeight += 70 + spacer
+            return imgView
     }
+//
+//    func generateBoardTitle() -> UILabel {
+//        let label3 = UILabel()
+//        label3.text = "Leadership Board\nTop Supporters of Small Merchants"
+//        label3.font = UIFont.systemFont(ofSize: 20)
+//        label3.textColor = visaOrange
+//        label3.numberOfLines = 2
+//        label3.frame = CGRect(x: 40, y: currentHeight, width: frameWidth! - 40, height: 50)
+//        currentHeight += 50 + spacer
+//        return label3
+//    }
     
     
         
@@ -79,8 +90,8 @@ class LeadershipBoardViewController: UIViewController {
     func generateVisaImage() -> UIImageView {
         let img = UIImage(named: "visa")
         let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: frameWidth! - 130, y: currentHeight, width: 80, height: 70)
-        currentHeight += 70
+        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
+        currentHeight += 50
         return imgView
     }
     

@@ -12,18 +12,16 @@ class MerchantPageViewController: UIViewController {
     
     /* - MARK: Data input */
     var userName: String? = nil
-    var selectedFriend: String? = nil
+    var selectedRecipientName: String?
     
-    var merchantName: String? = "Blue Angel Cafe"
-    var merchantCategory: String? = "Coffee & Tea"
-    var merchantWeekdayHour: String? = "Hours: Mon - Fri, 10:00AM - 7:00PM"
+    var merchant: Merchant?
     var merchantWeekendHour: String? = "Hours: Sat - Sun, 11:00AM - 5:00PM"
     var merchantAddress: String? = "2700 Hearst Ave, Berkeley, CA, 94608"
     
 
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
-    var currentHeight: CGFloat = 100
+    var currentHeight: CGFloat = 85
     var frameWidth: CGFloat?
     
     override func viewDidLoad() {
@@ -33,26 +31,27 @@ class MerchantPageViewController: UIViewController {
         self.view.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
         
-        self.view.addSubview(generateSectionHeaderLabel(text: "Blue Angel Cafe"))
-        self.view.addSubview(generateMerchantPicture(pictureName: "tfl", merchantName: "Blue Angel Cafe"))
-        self.view.addSubview(generateMerchantInfo(name: "Blue Angle Cafe", hour: "Hours: Mon - Fri, 10:00AM - 7:00PM", address: "2700 Hearst Ave, Berkeley, CA, 94608"))
+        self.view.addSubview(generateVisaImage())
+        self.view.addSubview(generateMerchantPicture(pictureName: "tfl"))
+        self.view.addSubview(generateSectionHeaderLabel(text: self.merchant!.name))
+        self.view.addSubview(generateMerchantInfo(category: "  " + categoryToString[self.merchant!.category]!, hour: self.merchant!.hour, address: merchantAddress!))
         self.view.addSubview(generateButtons())
     }
     
-    func generateMerchantPicture(pictureName: String, merchantName: String) -> UIImageView {
-        let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: frameWidth! - 50)
+    func generateMerchantPicture(pictureName: String) -> UIImageView {
+        let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: frameWidth! - 60)
         let imgView = UIImageView(frame: frame)
         imgView.contentMode = .scaleToFill
         imgView.clipsToBounds = true
         imgView.image = UIImage(named: pictureName)
         
-        currentHeight += frameWidth! - 50 + spacer * 2
+        currentHeight += frameWidth! - 60
         return imgView
     }
     
-    func generateMerchantInfo(name: String, hour: String, address: String) -> UIView {
+    func generateMerchantInfo(category: String, hour: String, address: String) -> UIView {
         let label1 = UILabel()
-        label1.text = name
+        label1.text = category
         label1.font = UIFont.systemFont(ofSize: 18)
         label1.textColor =  visaOrange
         
@@ -70,7 +69,7 @@ class MerchantPageViewController: UIViewController {
         
         let label4 = UILabel()
         label4.text = address
-        label4.font = UIFont.systemFont(ofSize: 18)
+        label4.font = UIFont.systemFont(ofSize: 17)
         label4.textColor = .darkGray
         label4.numberOfLines = 2
         
@@ -84,44 +83,58 @@ class MerchantPageViewController: UIViewController {
         stack.addArrangedSubview(label4)
 //        stack.translatesAutoresizingMaskIntoConstraints = false
         
-        stack.frame = CGRect(x: 10, y: currentHeight, width: frameWidth! - 10, height: 100)
+        stack.frame = CGRect(x: 10, y: currentHeight, width: frameWidth! - 70, height: 100)
         currentHeight += 100 + spacer * 2
         return stack
     }
     
+    
     func generateButtons() -> UIView {
-        let button1 = UIButton()
-        button1.setTitle("Send Gift", for: .normal)
-        button1.setTitleColor(.white, for: .normal)
-        button1.titleLabel?.font = UIFont.systemFont(ofSize: 23)
-        button1.contentHorizontalAlignment = .center
-        button1.backgroundColor = visaBlue
+        let button1 = CustomButton()
+        button1.setImage(UIImage(named: "send_a_gift"), for: .normal)
+        button1.backgroundColor = .white
+        button1.merchant = self.merchant
         button1.translatesAutoresizingMaskIntoConstraints = false
         button1.addTarget(self, action: #selector(MerchantPageViewController.sendGiftButtonPressed(sender:)), for: .touchUpInside)
         
-        let button2 = UIButton()
-        button2.setTitle("Leadership\nBoard", for: .normal)
-        button2.setTitleColor(.white, for: .normal)
-        button2.titleLabel?.font = UIFont.systemFont(ofSize: 23)
-        button2.contentHorizontalAlignment = .center
-        button2.backgroundColor = visaBlue
-        button2.titleLabel?.numberOfLines = 2
+        let button2 = CustomButton()
+        button2.setImage(UIImage(named: "leadership_board"), for: .normal)
+        button2.backgroundColor = .white
+        button2.merchant = self.merchant
         button2.translatesAutoresizingMaskIntoConstraints = false
         button2.addTarget(self, action: #selector(MerchantPageViewController.leadershipButtonPressed(sender:)), for: .touchUpInside)
         
-        let view = generateEvenContainerView(subViews: [button1, button2], x: 10, y: currentHeight, width: frameWidth! - 20, height: 70, verticleSpacing: spacer, horizontalSpacing: 20)
+        let view = generateEvenContainerView(subViews: [button1, button2], x: 10, y: currentHeight, width: frameWidth! - 20, height: 85, verticleSpacing: spacer, horizontalSpacing: 20)
         view.backgroundColor = .white
         view.isUserInteractionEnabled = true
         
         return view
     }
     
-    @objc func leadershipButtonPressed(sender: UIButton!) {
-        self.navigationController?.pushViewController(LeadershipBoardViewController(), animated: true)
+    @objc func sendGiftButtonPressed(sender: CustomButton!) {
+        if (selectedRecipientName == nil) {
+            let vc = FriendListViewController()
+            vc.selectedMerchant = self.merchant
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = SelectAmountViewController()
+            vc.recipientName = self.selectedRecipientName
+            vc.merchant = self.merchant
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
-    @objc func sendGiftButtonPressed(sender: UIButton!) {
-        self.navigationController?.pushViewController(GiftSendingViewController(), animated: true)
+    @objc func leadershipButtonPressed(sender: CustomButton!) {
+        let vc = LeadershipBoardViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func generateVisaImage() -> UIImageView {
+        let img = UIImage(named: "visa")
+        let imgView = UIImageView(image: img)
+        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
+        currentHeight += 50
+        return imgView
     }
     
     // Generate Evenly distributed container view
@@ -161,30 +174,14 @@ class MerchantPageViewController: UIViewController {
     }
     
     func generateSectionHeaderLabel(text: String) -> UILabel {
-        let frame = CGRect(x: 30, y: currentHeight, width: 200, height: 50)
+        let frame = CGRect(x: 30, y: currentHeight, width: 200, height: 40)
         let label = UILabel(frame: frame)
         label.text = text
         label.backgroundColor = .white
         label.textColor = .darkGray
-        label.font = UIFont(name: label.font.fontName, size: 23)
-        currentHeight += 50
+        label.font = UIFont.boldSystemFont(ofSize: 23)
+        currentHeight += 40
         return label
     }
-    
-    
-    
-    /* - MARK: Model */
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

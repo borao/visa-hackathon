@@ -48,7 +48,7 @@ class CYLPlusButtonSubclass: CYLPlusButton,CYLPlusButtonSubclassing {
     }
     
     static func plusChildViewController() -> UIViewController! {
-        let vc = GiftViewController()
+        let vc = FriendListViewController()
         let nav = UINavigationController(rootViewController: vc)
         return nav
         

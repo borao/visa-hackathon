@@ -11,8 +11,9 @@ import UIKit
 class GiftSendingViewController: UIViewController {
     /* - MARK: Data input */
     var userName: String? = nil
-    var recipientName: String? = nil
-    var merchantName: String? = nil
+    var recipientName: String?
+    var merchant: Merchant?
+    var amountSelected: Int?
     
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
@@ -34,30 +35,32 @@ class GiftSendingViewController: UIViewController {
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         // Do any additional setup after loading the view.
         scrollView.addSubview(generateVisaImage())
-        scrollView.addSubview(generateMiddleTitle(text: "Sending a $10.00 Gift to", font: 20, color: visaBlue))
-        scrollView.addSubview(generateMiddleTitle(text: "Kevin the Minion", font: 22, color: visaOrange))
         currentHeight += spacer
+        scrollView.addSubview(generateMiddleTitle(text: "Sending a $" + String(self.amountSelected!) + ".00 Gift to", font: 22, color: visaBlue, numOfLine: 1, height: 40))
+        scrollView.addSubview(generateMiddleTitle(text: recipientName!, font: 24, color: visaOrange, numOfLine: 1, height: 40))
+        currentHeight += spacer * 0.5
         scrollView.addSubview(generateSendingPictures())
-        scrollView.addSubview(generateMiddleTitle(text: "To spend @", font: 14, color: visaBlue))
+        scrollView.addSubview(generateMiddleTitle(text: "To spend @", font: 14, color: visaBlue, numOfLine: 1, height: 50))
         scrollView.addSubview(generateMerchantPicture())
-        scrollView.addSubview(generateMiddleTitle(text: "Blue Angel Cafe", font: 20, color: visaBlue))
+        scrollView.addSubview(generateMiddleTitle(text: self.merchant!.name, font: 20, color: visaBlue, numOfLine: 1, height: 40))
         currentHeight += spacer
-        scrollView.addSubview(generateMiddleTitle(text: "Thank you for your support to local merchants!", font: 12, color: visaOrange))
+        scrollView.addSubview(generateMiddleTitle(text: "Thank you for your support to local merchants!", font: 14, color: visaOrange, numOfLine: 1, height: 30))
+        scrollView.addSubview(generateMiddleTitle(text: "  NOTE: If receiver does not make a purchase within 7 days, entire amount will be refunded. If receiver does not spend all $10.00, the rest will be donated to the merchant to support smaller merchants.", font: 14, color: skyBlue, numOfLine: 4, height: 90))
         scrollView.addSubview(generateConfirmButton())
         
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
     }
     
     
-    func generateMiddleTitle(text: String, font: CGFloat, color: UIColor) -> UILabel {
+    func generateMiddleTitle(text: String, font: CGFloat, color: UIColor, numOfLine: Int, height: CGFloat) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = UIFont.systemFont(ofSize: font)
         label.textColor = color
         label.textAlignment = .center
-        label.numberOfLines = 1
-        label.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
-        currentHeight += 50
+        label.numberOfLines = numOfLine
+        label.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: height)
+        currentHeight += height
         return label
     }
     
@@ -103,18 +106,20 @@ class GiftSendingViewController: UIViewController {
     }
     
     func generateConfirmButton() -> UIButton {
-        let button = UIButton()
-        button.frame = CGRect(x: 20, y: currentHeight, width: frameWidth! - 40, height: 50)
-        button.setTitle("CONFIRM & SEND GIFT", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = visaBlue
-        button.layer.cornerRadius = 15
-        button.addTarget(self, action: #selector(GiftSendingViewController.confirmButtonTapped), for: .touchUpInside)
+        let button = CustomButton()
+        button.frame = CGRect(x: 20, y: currentHeight, width: frameWidth! - 40, height: 65)
+        button.setImage(UIImage(named: "confirm_gift"), for: .normal)
+        button.recipientName = self.recipientName
+        button.amountSelected = self.amountSelected
+        button.addTarget(self, action: #selector(GiftSendingViewController.confirmButtonTapped(sender:)), for: .touchUpInside)
         return button
     }
     
-    @objc func confirmButtonTapped() {
-        self.navigationController?.pushViewController(GiftSentViewController(), animated: true)
+    @objc func confirmButtonTapped(sender: CustomButton) {
+        let vc = GiftSentViewController()
+        vc.amountSelected = self.amountSelected
+        vc.recipientName = sender.recipientName
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     /* - MARK: Some helper functions */
@@ -123,8 +128,8 @@ class GiftSendingViewController: UIViewController {
     func generateVisaImage() -> UIImageView {
         let img = UIImage(named: "visa")
         let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: frameWidth! - 130, y: currentHeight, width: 80, height: 70)
-        currentHeight += 70
+        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
+        currentHeight += 50
         return imgView
     }
     

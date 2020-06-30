@@ -12,7 +12,8 @@ import MapKit
 class CategoryViewController: UIViewController {
     /* - MARK: Data input */
     var category: MerchantCaterogy?
-    var merchantNames: [String]?
+    var merchants: [Merchant]?
+    var recipientName: String?
     
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
@@ -33,11 +34,11 @@ class CategoryViewController: UIViewController {
         scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         
+        scrollView.addSubview(generateVisaImage())
         scrollView.addSubview(generateMap())
         scrollView.addSubview(generateSeparationLine())
-        print(self.merchantNames)
-        for i in 0 ..< self.merchantNames!.count {
-            scrollView.addSubview(generateRecommendation(imgName: "tfl", merchantName: self.merchantNames![i]))
+        for i in 0 ..< self.merchants!.count {
+            scrollView.addSubview(generateRecommendation(imgName: "tfl", merchantName: self.merchants![i].name, merchantHour: self.merchants![i].hour))
         }
         
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
@@ -46,7 +47,7 @@ class CategoryViewController: UIViewController {
     }
     
     func generateMap() -> MKMapView {
-        let frame = CGRect(x: 0, y: 0, width: frameWidth!, height: frameWidth! - 30)
+        let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: frameWidth! - 30)
         let map = MKMapView(frame: frame)
         let initialLocation = CLLocation(latitude: 37.8396956, longitude: -122.2888659)
         let ikes = CLLocation(latitude: 37.8390459, longitude: -122.2917944)
@@ -74,16 +75,21 @@ class CategoryViewController: UIViewController {
         return map
     }
     
-    func generateRecommendation(imgName: String, merchantName: String) -> UIView {
+    func generateRecommendation(imgName: String, merchantName: String, merchantHour: String) -> UIView {
         let container = generateUnevenContainerView(left: generateRecommendImage(name: "tfl"), right: generateRecommendLabel(merchantName: merchantName), ratio: 0.4, x: 30, y: currentHeight, width: frameWidth! - 60, height: 100, spacing: spacer)
         container.isUserInteractionEnabled = true
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(CategoryViewController.pushMerchantPageVC))
+        let tapRecognizer = MerchantTappedGestureRecognizer(target: self, action: #selector(CategoryViewController.pushMerchantPageVC(sender:)))
+        tapRecognizer.merchant = merchantLookUp(merchantName: merchantName)
+        tapRecognizer.recipientName = self.recipientName
         container.addGestureRecognizer(tapRecognizer)
         return container
     }
     
-    @objc func pushMerchantPageVC() {
-        self.navigationController?.pushViewController(MerchantPageViewController(), animated: true)
+    @objc func pushMerchantPageVC(sender: MerchantTappedGestureRecognizer) {
+        let vc = MerchantPageViewController()
+        vc.merchant = sender.merchant
+        vc.selectedRecipientName = sender.recipientName
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func generateRecommendImage(name: String) -> UIImageView {
@@ -147,6 +153,14 @@ class CategoryViewController: UIViewController {
     
     /* - MARK: Some helper functions */
     // This function generate uneven container view, UPDATING currentHeight in the end
+    func generateVisaImage() -> UIImageView {
+        let img = UIImage(named: "visa")
+        let imgView = UIImageView(image: img)
+        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
+        currentHeight += 50
+        return imgView
+    }
+    
     func generateUnevenContainerView(left: UIView, right: UIView, ratio: CGFloat, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, spacing: CGFloat) -> UIView {
         let frame = CGRect(x: x, y: y, width: width, height: height)
         let container = UIView(frame: frame)

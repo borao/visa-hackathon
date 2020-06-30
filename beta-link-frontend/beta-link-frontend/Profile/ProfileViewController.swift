@@ -39,6 +39,7 @@ class ProfileViewController: UIViewController {
         scrollView.addSubview(generateSeparationLine())
         scrollView.addSubview(generateSectionHeaderLabel(text: "Manage Gifts"))
         scrollView.addSubview(generateManageGiftContainer())
+        currentHeight += spacer
         scrollView.addSubview(generateSeparationLine())
         scrollView.addSubview(generateSectionHeaderLabel(text: "Impact"))
         scrollView.addSubview(generateImpactContainer())
@@ -48,14 +49,6 @@ class ProfileViewController: UIViewController {
         
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
         // Do any additional setup after loading the view.
-    }
-    
-    func generateVisaImage() -> UIImageView {
-        let img = UIImage(named: "visa")
-        let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: frameWidth! - 130, y: currentHeight, width: 80, height: 70)
-        currentHeight += 70
-        return imgView
     }
     
     // Profile section
@@ -94,7 +87,7 @@ class ProfileViewController: UIViewController {
     // Manage gift section
     func generateManageGiftContainer() -> UIView {
         let imgView = UIImageView()
-        imgView.image = UIImage(named: "sent")
+        imgView.image = UIImage(named: "manage_sent")
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
         imgView.layer.cornerRadius = 10
@@ -102,7 +95,7 @@ class ProfileViewController: UIViewController {
         imgView.backgroundColor = .white
         
         let imgView2 = UIImageView()
-        imgView2.image = UIImage(named: "redeemed")
+        imgView2.image = UIImage(named: "manage_redeemed")
         imgView2.contentMode = .scaleAspectFit
         imgView2.clipsToBounds = true
         imgView2.layer.cornerRadius = 10
@@ -110,14 +103,14 @@ class ProfileViewController: UIViewController {
         imgView2.backgroundColor = .white
         
         let imgView3 = UIImageView()
-        imgView3.image = UIImage(named: "check")
+        imgView3.image = UIImage(named: "manage_past_gift")
         imgView3.contentMode = .scaleAspectFit
         imgView3.clipsToBounds = true
         imgView3.layer.cornerRadius = 10
         imgView3.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         imgView3.backgroundColor = .white
         
-        let container = generateEvenContainerView(subViews: [imgView, imgView2, imgView3], x: 35, y: currentHeight, width: frameWidth! - 70, height: 100, verticleSpacing: 20, horizontalSpacing: 50)
+        let container = generateEvenContainerView(subViews: [imgView, imgView2, imgView3], x: 35, y: currentHeight, width: frameWidth! - 70, height: 100, verticleSpacing: 0, horizontalSpacing: 0)
         container.backgroundColor = .white
         
         return container
@@ -169,6 +162,14 @@ class ProfileViewController: UIViewController {
     
 /* - MARK: Some helper functions */
     // This function generate uneven container view, UPDATING currentHeight in the end
+    func generateVisaImage() -> UIImageView {
+        let img = UIImage(named: "visa")
+        let imgView = UIImageView(image: img)
+        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
+        currentHeight += 50
+        return imgView
+    }
+    
     func generateUnevenContainerView(left: UIView, right: UIView, ratio: CGFloat, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, spacing: CGFloat) -> UIView {
         let frame = CGRect(x: x, y: y, width: width, height: height)
         let container = UIView(frame: frame)

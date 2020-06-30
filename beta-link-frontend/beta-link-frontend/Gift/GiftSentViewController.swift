@@ -10,11 +10,13 @@ import UIKit
 
 class GiftSentViewController: UIViewController {
     /* - MARK: Data input */
-    var recipientName: String? = nil
+    var recipientName: String?
+    var amountSelected: Int?
+    var merchant: Merchant?
     
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
-    var currentHeight: CGFloat = 100
+    var currentHeight: CGFloat = 90
     var frameWidth: CGFloat?
     
     override func viewDidLoad() {
@@ -26,27 +28,16 @@ class GiftSentViewController: UIViewController {
         self.view.addSubview(generateVisaImage())
         self.view.addSubview(generateSentPicture())
         self.view.addSubview(generateMiddleTitle(text: "Sent!", font: 28, color: visaBlue))
-        self.view.addSubview(generateMiddleTitle(text: "Thank you for your support to local merchants!", font: 14, color: visaOrange))
+        self.view.addSubview(generateMiddleTitle(text: "Thank you for your support to local merchants!", font: 16, color: visaOrange))
         currentHeight += spacer * 3
-        self.view.addSubview(generateNameCard(imgName: "minion", text1: "Kevin the Minion", text2: "will receive your gift!", text3: "", font1: 16, font2: 16, font3: 1, labelName: "", x: 20, y: currentHeight))
+        self.view.addSubview(generateNameCard(imgName: "minion", text1: recipientName!, text2: "will receive your gift!", text3: "", font1: 16, font2: 16, font3: 1, labelName: "", x: 20, y: currentHeight))
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func generateMiddleTitle(text: String, font: CGFloat, color: UIColor) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.font = UIFont.systemFont(ofSize: font)
+        label.font = UIFont.boldSystemFont(ofSize: font)
         label.textColor = color
         label.textAlignment = .center
         label.numberOfLines = 1
@@ -58,7 +49,7 @@ class GiftSentViewController: UIViewController {
     func generateSentPicture() -> UIImageView {
         let imgView = UIImageView()
         imgView.image = UIImage(named: "redeemed")
-        imgView.frame = CGRect(x: (frameWidth! - 180) / 2, y: currentHeight, width: 180, height: 180)
+        imgView.frame = CGRect(x: (frameWidth! - 180) / 2 - 30, y: currentHeight, width: 180, height: 180)
         imgView.contentMode = .scaleAspectFit
         imgView.clipsToBounds = true
         currentHeight += 180
@@ -72,8 +63,8 @@ class GiftSentViewController: UIViewController {
     func generateVisaImage() -> UIImageView {
         let img = UIImage(named: "visa")
         let imgView = UIImageView(image: img)
-        imgView.frame = CGRect(x: frameWidth! - 130, y: currentHeight, width: 80, height: 70)
-        currentHeight += 70
+        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 50)
+        currentHeight += 50
         return imgView
     }
     

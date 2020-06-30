@@ -9,21 +9,6 @@
 import Foundation
 import SQLite
 
-enum MerchantCaterogy: Int {
-    case coffee = 1
-    case fastFood = 2
-    case dessert = 3
-    case clothing = 4
-    case grocery = 5
-    case beauty = 6
-}
-
-struct Merchant {
-    var name: String
-    var category: MerchantCaterogy
-    var hour: String
-}
-
 var allMerchants: [Merchant] = []
 
 class DatabaseHelper {

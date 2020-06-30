@@ -118,8 +118,7 @@ class MerchantLocator:
             "latitude": merchantInfo["locationAddressLatitude"]
         }
 
-        json_dump = json.dumps(a_merchant)
-        return json_dump
+        return a_merchant
 
     def postSearch_by_Category(self, start_idx, distance, merchantCategoryCode, zipcode):
         attrList = '"searchAttrList":{"distance": "' + str(distance) + \

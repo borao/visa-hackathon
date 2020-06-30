@@ -21,3 +21,6 @@ python -m pip install Pillow
 # We'll authenticate as that user later in our example.
 python manage.py createsuperuser --email betalink@example.com --username betalink --password password123
 
+# for search OTHERS: USE ZIPCODE 94129, otherwise no result will return
+# because prepoluated data come from this zipcode only
+

@@ -11,7 +11,7 @@
     "distance": "0.38 m",
     "longitude": "-122.388046",
     "latitude": "37.742081",
-    "profilePic": "media/merchantLogo/STARBUCKS.jpg"
+    "profilePic": "media/merchantLogo/Joes_lcoal_coffee.jpg"
   },
   {
     "merchantName": "SEAKOR MARKET",
@@ -24,7 +24,8 @@
     "category": "FAST FOOD RESTAURANTS",
     "distance": "1.67 m",
     "longitude": "-122.483204",
-    "latitude": "37.78011"
+    "latitude": "37.78011",
+    "profilePic": "media/merchantLogo/SEAKOR.jpg"
   },
   {
     "merchantName": "CANTALOUPE SYSTEMS",
@@ -37,7 +38,8 @@
     "category": "FAST FOOD RESTAURANTS",
     "distance": "1.05 m",
     "longitude": "-122.400372",
-    "latitude": "37.743381"
+    "latitude": "37.743381",
+    "profilePic": "media/merchantLogo/CANTALOUPE_SYSTEMS.png"
   },
   {
     "merchantName": "MCDONALDS",
@@ -50,7 +52,8 @@
     "category": "FAST FOOD RESTAURANTS",
     "distance": "1.33 m",
     "longitude": "-122.40589",
-    "latitude": "37.74208"
+    "latitude": "37.74208",
+    "profilePic": "media/merchantLogo/MCDONALDS.png"
   },
   {
     "merchantName": "JACK'S BOX",
@@ -63,7 +66,8 @@
     "category": "FAST FOOD RESTAURANTS",
     "distance": "1.36 m",
     "longitude": "-122.406427",
-    "latitude": "37.741648"
+    "latitude": "37.741648",
+    "profilePic": "media/merchantLogo/JACK_IN_THE_BOX.png"
   },
   {
     "merchantName": "ALL STARS DONUTS",
@@ -76,7 +80,8 @@
     "category": "BAKERIES",
     "distance": "0.55 m",
     "longitude": "-122.468704",
-    "latitude": "37.782761"
+    "latitude": "37.782761",
+    "profilePic": "media/merchantLogo/ALL STARS DONUTS.jpg"
   },
   {
     "merchantName": "REED GREENOUGH",
@@ -89,7 +94,8 @@
     "category": "FAST FOOD RESTAURANTS",
     "distance": "1.27 m",
     "longitude": "-122.441082",
-    "latitude": "37.799736"
+    "latitude": "37.799736",
+    "profilePic": "media/merchantLogo/REED GREENOUGH.png"
   },
   {
     "merchantName": "EXPLORATORIUM",
@@ -115,7 +121,8 @@
     "category": "RESTAURANTS",
     "distance": "2.16 m",
     "longitude": "-122.418385",
-    "latitude": "37.751492"
+    "latitude": "37.751492",
+    "profilePic": "media/merchantLogo/MI YUCATAN.png"
   },
   {
     "merchantName": "JAMBA JUICE",
@@ -128,7 +135,8 @@
     "category": "FAST FOOD RESTAURANTS",
     "distance": "0.14 m",
     "longitude": "-122.399623",
-    "latitude": "37.791336"
+    "latitude": "37.791336",
+    "profilePic": "media/merchantLogo/JAMBA JUICE.jpg"
   },
   {
     "merchantName": "TOKYO EXPRESS TERIYAKI HO",
@@ -141,7 +149,8 @@
     "category": "FAST FOOD RESTAURANTS",
     "distance": "0.16 m",
     "longitude": "-122.403965",
-    "latitude": "37.793641"
+    "latitude": "37.793641",
+    "profilePic": "media/merchantLogo/TOKYO EXPRESS TERIYAKI HO.png"
   },
   {
     "merchantName": "ANGELIC PRETTY USA SAXONY",
@@ -154,7 +163,8 @@
     "category": "MENS/WOMENS CLOTHING STORES",
     "distance": "0.36 m",
     "longitude": "-122.403517",
-    "latitude": "37.788176"
+    "latitude": "37.788176",
+    "profilePic": "media/merchantLogo/ANGELIC PRETTY USA SAXONY.png"
   },
   {
     "merchantName": "SAN FRANCISCO CITY WEAR",
@@ -167,7 +177,8 @@
     "category": "FAMILY CLOTHING STORES",
     "distance": "0.42 m",
     "longitude": "-122.394404",
-    "latitude": "37.795834"
+    "latitude": "37.795834",
+    "profilePic": "media/merchantLogo/SAN FRANCISCO CITY WEAR.png"
   },
   {
     "merchantName": "KNITZ AND LEATH",
@@ -180,7 +191,8 @@
     "category": "FAMILY CLOTHING STORES",
     "distance": "0.6 m",
     "longitude": "-122.40749",
-    "latitude": "37.800207"
+    "latitude": "37.800207",
+    "profilePic": "media/merchantLogo/KNITZ AND LEATH.png"
   },
   {
     "merchantName": "MICAELA GREG",
@@ -193,7 +205,8 @@
     "category": "PIECE GOODS/NOTIONS/DRY GOODS",
     "distance": "0.62 m",
     "longitude": "-122.408281",
-    "latitude": "37.800015"
+    "latitude": "37.800015",
+    "profilePic": "media/merchantLogo/MICAELA GREG.png"
   },
   {
     "merchantName": "CRIS ZANDER DESIGN",
@@ -219,7 +232,8 @@
     "category": "MISC SPECIALTY RETAIL",
     "distance": "1.67 m",
     "longitude": "-122.430339",
-    "latitude": "37.785532"
+    "latitude": "37.785532",
+    "profilePic": "media/merchantLogo/SAKURASAKURA.png"
   },
   {
     "merchantName": "DREAMY ANGELS",
@@ -245,7 +259,8 @@
     "category": "MENS/WOMENS CLOTHING STORES",
     "distance": "1.8 m",
     "longitude": "-122.433763",
-    "latitude": "37.788491"
+    "latitude": "37.788491",
+    "profilePic": "media/merchantLogo/ELIZABETH CHARLES.jpg"
   },
   {
     "merchantName": "JS FACTORY BARGAIN",
@@ -271,7 +286,8 @@
     "category": "RESTAURANTS",
     "distance": "1.39 m",
     "longitude": "-122.451114",
-    "latitude": "37.781949"
+    "latitude": "37.781949",
+     "profilePic": "media/merchantLogo/SUNNYMARKET.png"
   },
   {
     "merchantName": "DENHARDS MARKET",
@@ -284,7 +300,8 @@
     "category": "GROCERY STORES/SUPERMARKETS",
     "distance": "1.68 m",
     "longitude": "-122.468053",
-    "latitude": "37.775081"
+    "latitude": "37.775081",
+    "profilePic": "media/merchantLogo/DENHARDS MARKET.png"
   },
   {
     "merchantName": "THE HONEY WINE COMPANY",
@@ -310,7 +327,8 @@
     "category": "MISC FOOD STORES - DEFAULT",
     "distance": "1.71 m",
     "longitude": "-122.43312",
-    "latitude": "37.797409"
+    "latitude": "37.797409",
+    "profilePic": "media/merchantLogo/EARTHBAR UNION STREET EQUINOX.png"
   },
   {
     "merchantName": "LASHFULLY",
@@ -323,7 +341,8 @@
     "category": "BEAUTY/BARBER SHOPS",
     "distance": "1.79 m",
     "longitude": "-122.431499",
-    "latitude": "37.797573"
+    "latitude": "37.797573",
+     "profilePic": "media/merchantLogo/LASHFULLY.png"
   },
   {
     "merchantName": "RUTILYS MARKET",
@@ -336,7 +355,8 @@
     "category": "MISC FOOD STORES - DEFAULT",
     "distance": "2.01 m",
     "longitude": "-122.427449",
-    "latitude": "37.799033"
+    "latitude": "37.799033",
+    "profilePic": "media/merchantLogo/RUTILYS MARKET.png"
   },
   {
     "merchantName": "TRANSFER MARKET",
@@ -349,7 +369,8 @@
     "category": "GROCERY STORES/SUPERMARKETS",
     "distance": "2.07 m",
     "longitude": "-122.438319",
-    "latitude": "37.777418"
+    "latitude": "37.777418",
+    "profilePic": "media/merchantLogo/TRANSFER MARKET.png"
   },
   {
     "merchantName": "GREEN EARTH NATURAL FO",
@@ -362,7 +383,8 @@
     "category": "GROCERY STORES/SUPERMARKETS",
     "distance": "2.07 m",
     "longitude": "-122.438256",
-    "latitude": "37.777429"
+    "latitude": "37.777429",
+    "profilePic": "media/merchantLogo/GREEN EARTH NATURAL FO.png"
   },
   {
     "merchantName": "AA MARKET",
@@ -375,7 +397,8 @@
     "category": "MISC FOOD STORES - DEFAULT",
     "distance": "2.07 m",
     "longitude": "-122.439767",
-    "latitude": "37.776336"
+    "latitude": "37.776336",
+    "profilePic": "media/merchantLogo/AA MARKET.png"
   },
   {
     "merchantName": "INTELLIGENT BEAUTY-GH",
@@ -401,7 +424,8 @@
     "category": "BEAUTY/BARBER SHOPS",
     "distance": "1.2 m",
     "longitude": "-122.442381",
-    "latitude": "37.800057"
+    "latitude": "37.800057",
+    "profilePic": "media/merchantLogo/HAND TOUCH NAIL CARE.png"
   },
   {
     "merchantName": "SIMPLY CUTS",
@@ -414,7 +438,8 @@
     "category": "BEAUTY/BARBER SHOPS",
     "distance": "1.23 m",
     "longitude": "-122.441764",
-    "latitude": "37.800129"
+    "latitude": "37.800129",
+    "profilePic": "media/merchantLogo/SIMPLY CUTS.png"
   },
   {
     "merchantName": "RENDEZ VOUS NAILS",
@@ -427,7 +452,8 @@
     "category": "BEAUTY/BARBER SHOPS",
     "distance": "1.24 m",
     "longitude": "-122.446319",
-    "latitude": "37.788284"
+    "latitude": "37.788284",
+    "profilePic": "media/merchantLogo/RENDEZ VOUS NAILS.png"
   },
   {
     "merchantName": "CELANDINE",
@@ -440,7 +466,8 @@
     "category": "HEALTH &amp; BEAUTY SPAS",
     "distance": "1.28 m",
     "longitude": "-122.46635",
-    "latitude": "37.780705"
+    "latitude": "37.780705",
+    "profilePic": "media/merchantLogo/CELANDINE.png"
   },
   {
     "merchantName": "REILANI BEAUTY &amp; SPA",
@@ -453,7 +480,8 @@
     "category": "HEALTH &amp; BEAUTY SPAS",
     "distance": "1.3 m",
     "longitude": "-122.468711",
-    "latitude": "37.78077"
+    "latitude": "37.78077",
+    "profilePic": "media/merchantLogo/REILANI BEAUTY &amp; SPA.png"
   },
   {
     "merchantName": "MIMOSA NAILS",
@@ -466,7 +494,8 @@
     "category": "BEAUTY/BARBER SHOPS",
     "distance": "1.55 m",
     "longitude": "-122.440283",
-    "latitude": "37.787231"
+    "latitude": "37.787231",
+    "profilePic": "media/merchantLogo/MIMOSA NAILS.jpeg"
   },
   {
     "merchantName": "DRE HOLDER SALON",
@@ -479,7 +508,8 @@
     "category": "BEAUTY/BARBER SHOPS",
     "distance": "1.56 m",
     "longitude": "-122.435725",
-    "latitude": "37.798257"
+    "latitude": "37.798257",
+    "profilePic": "media/merchantLogo/DRE HOLDER SALON.png"
   },
   {
     "merchantName": "JM UNION STREET",
@@ -505,7 +535,8 @@
     "category": "MEMBER CLUBS/SPORT/REC/GOLF",
     "distance": "1.03 m",
     "longitude": "-122.452857",
-    "latitude": "37.787417"
+    "latitude": "37.787417",
+    "profilePic": "media/merchantLogo/MIGHTY PILATES.png"
   },
   {
     "merchantName": "GOLDEN GATE PARK GOLF DEV",
@@ -518,7 +549,8 @@
     "category": "PUBLIC GOLF COURSES",
     "distance": "2.75 m",
     "longitude": "-122.508371",
-    "latitude": "37.779925"
+    "latitude": "37.779925",
+    "profilePic": "media/merchantLogo/GOLDEN GATE PARK GOLF DEV.png"
   },
   {
     "merchantName": "STREET SOCCER USA",
@@ -544,7 +576,8 @@
     "category": "BICYCLE SHOPS/SALES/SERVICE",
     "distance": "2.82 m",
     "longitude": "-122.412846",
-    "latitude": "37.801925"
+    "latitude": "37.801925",
+    "profilePic": "media/merchantLogo/COLUMBUS CYCLERY.png"
   },
   {
     "merchantName": "WHEEL HOUSE",
@@ -583,7 +616,8 @@
     "category": "BICYCLE SHOPS/SALES/SERVICE",
     "distance": "3.87 m",
     "longitude": "-122.399849",
-    "latitude": "37.775756"
+    "latitude": "37.775756",
+    "profilePic": "media/merchantLogo/PERFORMANCE BICYCLE.png"
   },
   {
     "merchantName": "LUCKY STRIKE SAN FRANCISC",
@@ -609,7 +643,8 @@
     "category": "CHARITABLE/SOC SERVICE ORGS",
     "distance": "4.45 m",
     "longitude": "-122.397157",
-    "latitude": "37.762565"
+    "latitude": "37.762565",
+    "profilePic": "media/merchantLogo/SOCCER FOURS.png"
   },
   {
     "merchantName": "HOME HARDWARE",
@@ -625,7 +660,7 @@
     "latitude": "37.783059"
   },
   {
-    "merchantName": "6TH AVE FLOWERS",
+    "merchantName": "SWEETHEART'S FLOWER",
     "merchantID": "10813287",
     "storeID": "140456284",
     "streetAddress": "425 CLEMENT ST",
@@ -635,7 +670,8 @@
     "category": "FLORISTS",
     "distance": "1.12 m",
     "longitude": "-122.463614",
-    "latitude": "37.783013"
+    "latitude": "37.783013",
+    "profilePic": "media/merchantLogo/SWEETHEART'S FLOWER.png"
   },
   {
     "merchantName": "PAUL ROBERT FLORAL DSGN",
@@ -648,7 +684,8 @@
     "category": "FLORISTS",
     "distance": "1.52 m",
     "longitude": "-122.460807",
-    "latitude": "37.777363"
+    "latitude": "37.777363",
+    "profilePic": "media/merchantLogo/PAUL ROBERT FLORAL DSGN.png"
   },
   {
     "merchantName": "DO IT BEST CORP",
@@ -674,7 +711,8 @@
     "category": "HARDWARE STORES",
     "distance": "2.98 m",
     "longitude": "-122.413998",
-    "latitude": "37.782439"
+    "latitude": "37.782439",
+    "profilePic": "media/merchantLogo/PEERLESS GEN SUPPLY CO.png"
   },
   {
     "merchantName": "CANTON FLOWER SHOP",
@@ -687,7 +725,8 @@
     "category": "FLORISTS",
     "distance": "3.15 m",
     "longitude": "-122.406919",
-    "latitude": "37.794373"
+    "latitude": "37.794373",
+    "profilePic": "media/merchantLogo/CANTON FLOWER SHOP.png"
   },
   {
     "merchantName": "SAN FRANCISCO LUGGAGE",
@@ -713,6 +752,7 @@
     "category": "FLORIST SUPPLIES/NURSERY STOCK",
     "distance": "3.27 m",
     "longitude": "-122.406484",
-    "latitude": "37.786782"
+    "latitude": "37.786782",
+    "profilePic": "media/merchantLogo/UNION SQUARE FLOWERS.png"
   }
 ]

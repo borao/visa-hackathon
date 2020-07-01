@@ -6,10 +6,10 @@ from users.models import Customer, User
 class Command(BaseCommand):
 
     def add_arguments(self, parser):
-        parser.add_argument('userData.json', type=str)
+        parser.add_argument('customerData.json', type=str)
 
     def handle(self, *args, **options):
-        with open(options['userData.json']) as f:
+        with open(options['customerData.json']) as f:
             data_list = json.load(f)
 
         for data in data_list:

@@ -8,7 +8,7 @@
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": 9491234567,
-    "profilePic": "media/userLogo/Bob.jpg",
+    "profilePic": "media/userLogo/BOB.png",
     "user": 1,
     "username": "Bob",
     "password": "p@assword"
@@ -22,7 +22,7 @@
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": 9491239576,
-    "profilePic": "media/userLogo/Kevin.jpg",
+    "profilePic": "media/userLogo/KEVIN.png",
     "user": 2,
     "username": "Kevin",
     "password": "p@assword"
@@ -36,7 +36,7 @@
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": 9491232578,
-    "profilePic": "media/userLogo/Stuart.jpg",
+    "profilePic": "media/userLogo/STUART.png",
     "user": 3,
     "username": "Stuart",
     "password": "p@assword"
@@ -50,7 +50,7 @@
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": 9490139577,
-    "profilePic": "media/userLogo/Carl.jpg",
+    "profilePic": "media/userLogo/CARL.png",
     "user": 4,
     "username": "Carl",
     "password": "p@assword"
@@ -64,7 +64,7 @@
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": 9491236543,
-    "profilePic": "media/userLogo/Tom.jpg",
+    "profilePic": "media/userLogo/Tom.jpeg",
     "user": 5,
     "username": "Tom",
     "password": "p@assword"
@@ -78,7 +78,7 @@
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": 9491233434,
-    "profilePic": "media/userLogo/Dave.jpg",
+    "profilePic": "media/userLogo/DAVE.png",
     "user": 6,
     "username": "Dave",
     "password": "p@assword"

@@ -1,0 +1,29 @@
+reference for connecting endpoints
+site = http://localhost:8000
+
+# for user dashboard
+userDetail = /users/customer/<userID>
+userImpact = /orders/userImpact/<userID>
+transactionHistory = /orders/giftRelatedTo/<userID>/
+
+# for main page
+Favorites = /programs/enrollment/getFavoriteStore/<userId>
+
+# merchant by category
+merchantlist = /merchants/getMerchantByCategory/<distance>/<categoryCode>/<zipcode>/
+
+# leaderboard
+leaderBoard = /orders/getLeaderboard/<merchantID>
+
+# merchant detail
+merchantInfo = /merchants/<merchantID>/
+merchantGiftPurchased = /orders/giftForMerchant/<merchantID>/
+
+# loyalty program list page
+programList = /programs/enrollment/getActiveProgramsByUser/<userId>/
+
+# loyalty program detail page
+programDetail = /programs/enrollment/getProgramByUserAndMerchant/<userId>/<merchantID>/
+
+# friends
+friends = /users/friendship/getFriends/<userID>/

@@ -4,6 +4,13 @@ from datetime import timedelta, datetime
 from django.db.models import Sum
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets
+from .models import Order
+from .serializers import OrderSerializer
+from rest_framework.decorators import action
+from django.http import HttpResponse
+import requests
+from collections import Counter
+from django.db.models import Count
 from rest_framework.decorators import action
 from rest_framework.utils import json
 
@@ -13,6 +20,7 @@ from .serializers import OrderSerializer
 
 QRCODE_API_ENDPOINT = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data='
 
+
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
@@ -20,8 +28,16 @@ class OrderViewSet(viewsets.ModelViewSet):
     @action(detail = True, methods=['get'])
     def getQRCode(self, request, pk):
         requestUrl = QRCODE_API_ENDPOINT + pk
-        qrCode = requests.get(url = requestUrl)
+        qrCode = requests.get(url=requestUrl)
         return HttpResponse(qrCode.content, content_type="image/png")
+
+    # http://localhost:8000/orders/getLeaderboard/28937146/
+    @action(detail=False, url_path='getLeaderboard/(?P<merchantID>[^/.]+)')
+    def getLeaderboard(self, request, merchantID):
+        leaders = self.queryset.filter(merchantID = merchantID).select_related().values('senderID_id__user__username', 'senderID_id__profilePic')\
+            .annotate(totalNumberSent = Count('senderID')).order_by('-totalNumberSent')[:3]
+
+        return HttpResponse(leaders)
 
     @action(detail=False, methods=['post'])
     def purchaseGift(self, request):
@@ -61,23 +77,23 @@ class OrderViewSet(viewsets.ModelViewSet):
     # http://localhost:8000/orders/totalGiftAmountByMerchant/1111111/
     @action(detail = False, url_path='totalGiftAmountByMerchant/(?P<merchantID>[^/.]+)')
     def totalGiftAmountByMerchant(self, request, merchantID):
-        total = self.queryset.filter(merchantID = merchantID).aggregate(Sum('giftAmount'))
-        return HttpResponse(float(total['giftAmount__sum']))
+        total = float(self.queryset.filter(merchantID = merchantID).aggregate(Sum('giftAmount'))['giftAmount__sum'] or 0)
+        return HttpResponse(total)
 
     # http://localhost:8000/orders/userImpact/1/
     @action(detail = False, url_path='userImpact/(?P<userID>[^/.]+)')
     def userImpact(self, request, userID):
 
         sevenDaysAgo = (datetime.now() - timedelta(days = 7)).date()
-        numberGiftSentThisWeek = len(self.queryset.filter(senderID = userID).filter(date_ordered__gt=sevenDaysAgo))
+        numberGiftSentThisWeek = self.queryset.filter(senderID = userID).filter(date_ordered__gt=sevenDaysAgo).count()
 
         giftReceivedAggregatedThisWeek =  self.queryset.filter(receiverID = userID).filter(date_ordered__gt=sevenDaysAgo).aggregate(Sum('giftAmount'))
-        AmountReceivedThisWeek =  float(giftReceivedAggregatedThisWeek['giftAmount__sum'])
+        AmountReceivedThisWeek =  float(giftReceivedAggregatedThisWeek['giftAmount__sum'] or 0)
 
         giftSentAggregated = self.queryset.filter(senderID = userID).aggregate(Sum('giftAmount'))
-        amountGiftSent = float(giftSentAggregated['giftAmount__sum'])
+        amountGiftSent = float(giftSentAggregated['giftAmount__sum'] or 0)
 
-        numberGiftSent = len(self.queryset.filter(senderID = userID))
+        numberGiftSent = self.queryset.filter(senderID = userID).count()
 
         payload = {'numberGiftSentThisWeek': numberGiftSentThisWeek,
                    'AmountReceivedThisWeek': AmountReceivedThisWeek,

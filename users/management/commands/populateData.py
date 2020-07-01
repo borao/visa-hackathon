@@ -1,6 +1,6 @@
 import json
 from django.core.management.base import BaseCommand
-from users.models import User
+from users.models import Customer
 
 
 class Command(BaseCommand):
@@ -14,4 +14,4 @@ class Command(BaseCommand):
 
         for data in data_list:
             data['pk'] = data.pop('user')
-            User.objects.get_or_create(pk=data['pk'], defaults=data)
+            Customer.objects.get_or_create(pk=data['pk'], defaults=data)

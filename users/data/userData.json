@@ -1,8 +1,8 @@
 [
   {
-    "user": "Bob",
-    "street": "1201 Ralston Ave",
-    "city": "San Francisco",
+    "user": "1",
+    "street": "900 Metro Center Blvd",
+    "city": "Foster City",
     "state": "CA",
     "zipcode": "94129",
     "longitude": "-122.2763649",
@@ -11,7 +11,7 @@
     "profilePic": "media/userLogo/Bob.jpg"
   },
   {
-    "user": "Kevin",
+    "user": "2",
     "street": "901 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
@@ -22,7 +22,7 @@
     "profilePic": "media/userLogo/Kevin.jpg"
   },
   {
-    "user": "Stuart",
+    "user": "3",
     "street": "902 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
@@ -33,7 +33,7 @@
     "profilePic": "media/userLogo/Stuart.jpg"
   },
   {
-    "user": "Carl",
+    "user": "4",
     "street": "903 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
@@ -44,7 +44,7 @@
     "profilePic": "media/userLogo/Carl.jpg"
   },
   {
-    "user": "Tom",
+    "user": "5",
     "street": "904 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
@@ -55,7 +55,7 @@
     "profilePic": "media/userLogo/Tom.jpg"
   },
   {
-    "user": "Dave",
+    "user": "6",
     "street": "905 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",

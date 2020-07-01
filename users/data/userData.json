@@ -1,10 +1,10 @@
 [
   {
     "user": "Bob",
-    "street": "900 Metro Center Blvd",
-    "city": "Foster City",
+    "street": "1201 Ralston Ave",
+    "city": "San Francisco",
     "state": "CA",
-    "zipcode": "94124-1409",
+    "zipcode": "94129",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": "(949)123-4567",
@@ -15,54 +15,54 @@
     "street": "901 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
-    "zipcode": "94124-1409",
+    "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": "(949)123-9576",
-    "profilePic": "media/userLogo/Bob.jpg"
+    "profilePic": "media/userLogo/Kevin.jpg"
   },
   {
     "user": "Stuart",
     "street": "902 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
-    "zipcode": "94124-1409",
+    "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": "(949)123-2578",
-    "profilePic": "media/userLogo/Bob.jpg"
+    "profilePic": "media/userLogo/Stuart.jpg"
   },
   {
     "user": "Carl",
     "street": "903 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
-    "zipcode": "94124-1409",
+    "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": "(949)123-9577",
-    "profilePic": "media/userLogo/Bob.jpg"
+    "profilePic": "media/userLogo/Carl.jpg"
   },
   {
     "user": "Tom",
     "street": "904 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
-    "zipcode": "94124-1409",
+    "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": "(949)123-6543",
-    "profilePic": "media/userLogo/Bob.jpg"
+    "profilePic": "media/userLogo/Tom.jpg"
   },
   {
     "user": "Dave",
     "street": "905 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
-    "zipcode": "94124-1409",
+    "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
     "phone_number": "(949)123-3434",
-    "profilePic": "media/userLogo/Bob.jpg"
+    "profilePic": "media/userLogo/Dave.jpg"
   }
 ]

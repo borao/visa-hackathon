@@ -22,6 +22,8 @@ from users import urls as userUrl
 from order import urls as orderUrl
 from merchant import urls as merchantUrl
 from program import urls as programUrl
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 
@@ -32,6 +34,4 @@ urlpatterns = [
     path('merchants/', include(merchantUrl)),
     path('programs/',include(programUrl)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-
-
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

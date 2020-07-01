@@ -14,8 +14,6 @@ class Merchant(models.Model):
     latitude = models.CharField(max_length=100, blank=False, default='37.5592521')
     distance = models.CharField(max_length=100, default='100 m')
     storeID = models.CharField(max_length=100, default='0000000')
-    # hours = models.CharField(max_length=100)
-
     # TODO: check how bank account works with Visa payment: No bank account
     # bankAccount = models.CharField(max_length=200, blank=True)
     profilePic = models.ImageField(default='default_merchant.png', upload_to='merchantLogo/')

@@ -17,7 +17,29 @@
     "date_ordered": "2020-06-30",
     "giftAmount": "5.00",
     "message": "Happy Birthday",
-    "senderID": 1,
+    "senderID": 2,
+    "receiverID": 3,
+    "merchantID": "28937146"
+  },
+  {
+    "transactionID": 12,
+    "expiration_date": "2020-07-14",
+    "redeemed": false,
+    "date_ordered": "2020-06-30",
+    "giftAmount": "5.00",
+    "message": "Happy Birthday",
+    "senderID": 2,
+    "receiverID": 3,
+    "merchantID": "28937146"
+  },
+  {
+    "transactionID": 13,
+    "expiration_date": "2020-07-14",
+    "redeemed": false,
+    "date_ordered": "2020-06-30",
+    "giftAmount": "5.00",
+    "message": "Happy Birthday",
+    "senderID": 3,
     "receiverID": 2,
     "merchantID": "28937146"
   }

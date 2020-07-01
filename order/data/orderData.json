@@ -1,0 +1,24 @@
+[
+  {
+    "transactionID": 10,
+    "expiration_date": "2020-07-14",
+    "redeemed": false,
+    "date_ordered": "2020-06-30",
+    "giftAmount": "10.00",
+    "message": "Happy Birthday",
+    "senderID": 1,
+    "receiverID": 2,
+    "merchantID": "28937146"
+  },
+  {
+    "transactionID": 11,
+    "expiration_date": "2020-07-14",
+    "redeemed": false,
+    "date_ordered": "2020-06-30",
+    "giftAmount": "5.00",
+    "message": "Happy Birthday",
+    "senderID": 1,
+    "receiverID": 2,
+    "merchantID": "28937146"
+  }
+]

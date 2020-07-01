@@ -24,3 +24,4 @@ python manage.py createsuperuser --email betalink@example.com --username betalin
 # for search OTHERS: USE ZIPCODE 94129, otherwise no result will return
 # because prepoluated data come from this zipcode only
 
+python manage.py populateData merchant/data/merchantData.json

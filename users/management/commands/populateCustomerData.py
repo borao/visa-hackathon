@@ -1,6 +1,7 @@
 import json
 from django.core.management.base import BaseCommand
 from users.models import Customer, User
+from users import models as userModel
 
 
 class Command(BaseCommand):
@@ -14,5 +15,7 @@ class Command(BaseCommand):
 
         for data in data_list:
             data['pk'] = data.pop('user')
-            User.objects.create_user(username=data['pk'], email=f'{data["pk"]}@minions.com', password='glass')
-            Customer.objects.get_or_create(pk=data['pk'], defaults=data)
+            User.objects.create_user(username=data['username'], password=data.pop('password'))
+            Customer.objects.get_or_create(pk=data['pk'],
+                                           user=userModel.User.objects.all().get(username=data.pop('username')),
+                                           defaults=data)

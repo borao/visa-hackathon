@@ -21,7 +21,7 @@ class FriendShipViewSet(viewsets.ModelViewSet):
     # http://localhost:8000/users/friendship/getFriends/1/
     @action(detail=False,url_path='getFriends/(?P<userID>[^/.]+)')
     def getFriends(self, request, userID):
-        friends = self.queryset.filter(friendA = userID).select_related().values('friendB_id__user__username', 'friendB_id__profilePic')
+        friends = self.queryset.filter(friendA = userID).select_related().values('friendB_id__id', 'friendB_id__user__username', 'friendB_id__profilePic')
         return HttpResponse(friends, content_type='application/json')
 
 

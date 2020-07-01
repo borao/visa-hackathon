@@ -17,7 +17,8 @@ class Command(BaseCommand):
             data['pk'] = data.pop('user')
             User.objects.create_user(username=data['username'], password=data.pop('password'))
             Customer.objects.get_or_create(pk=data['pk'],
-                                           user=userModel.User.objects.all().get(username=data.pop('username')))
+                                           user=userModel.User.objects.all().get(username=data.pop('username')),
+                                           defaults=data)
         for customer in Customer.objects.all():
             if customer.id != 1:
                 Friendship.objects.get_or_create(friendA=Customer.objects.all().get(id=1), friendB=customer)

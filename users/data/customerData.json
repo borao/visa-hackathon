@@ -1,68 +1,86 @@
 [
   {
-    "user": "1",
+    "id": 1,
     "street": "900 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
     "zipcode": "94129",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
-    "phone_number": "9491234567",
-    "profilePic": "media/userLogo/Bob.jpg"
+    "phone_number": 9491234567,
+    "profilePic": "media/userLogo/Bob.jpg",
+    "user": 1,
+    "username": "Bob",
+    "password": "p@assword"
   },
   {
-    "user": "2",
+    "id": 2,
     "street": "901 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
     "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
-    "phone_number": "(949)123-9576",
-    "profilePic": "media/userLogo/Kevin.jpg"
+    "phone_number": 9491239576,
+    "profilePic": "media/userLogo/Kevin.jpg",
+    "user": 2,
+    "username": "Kevin",
+    "password": "p@assword"
   },
   {
-    "user": "3",
+    "id": 3,
     "street": "902 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
     "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
-    "phone_number": "(949)123-2578",
-    "profilePic": "media/userLogo/Stuart.jpg"
+    "phone_number": 9491232578,
+    "profilePic": "media/userLogo/Stuart.jpg",
+    "user": 3,
+    "username": "Stuart",
+    "password": "p@assword"
   },
   {
-    "user": "4",
+    "id": 4,
     "street": "903 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
     "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
-    "phone_number": "(949)123-9577",
-    "profilePic": "media/userLogo/Carl.jpg"
+    "phone_number": 9490139577,
+    "profilePic": "media/userLogo/Carl.jpg",
+    "user": 4,
+    "username": "Carl",
+    "password": "p@assword"
   },
   {
-    "user": "5",
+    "id": 5,
     "street": "904 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
     "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
-    "phone_number": "(949)123-6543",
-    "profilePic": "media/userLogo/Tom.jpg"
+    "phone_number": 9491236543,
+    "profilePic": "media/userLogo/Tom.jpg",
+    "user": 5,
+    "username": "Tom",
+    "password": "p@assword"
   },
   {
-    "user": "6",
+    "id": 6,
     "street": "905 Metro Center Blvd",
     "city": "Foster City",
     "state": "CA",
     "zipcode": "94124",
     "longitude": "-122.2763649",
     "latitude": "37.5592521",
-    "phone_number": "(949)123-3434",
-    "profilePic": "media/userLogo/Dave.jpg"
+    "phone_number": 9491233434,
+    "profilePic": "media/userLogo/Dave.jpg",
+    "user": 6,
+    "username": "Dave",
+    "password": "p@assword"
   }
 ]

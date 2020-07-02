@@ -1,47 +1,38 @@
 [
   {
-    "id": 1,
+    "id": 6,
     "curProgress": 2,
     "redeemed": false,
     "redeemDate": null,
     "userID": 1,
-    "merchantID": "29992901",
+    "merchantID": "28937146",
     "programID": 1
   },
   {
-    "id": 2,
-    "curProgress": 3,
-    "redeemed": false,
-    "redeemDate": null,
-    "userID": 1,
-    "merchantID": "62506377",
-    "programID": 1
-  },
-  {
-    "id": 3,
-    "curProgress": 6,
-    "redeemed": false,
-    "redeemDate": null,
-    "userID": 1,
-    "merchantID": "62506377",
-    "programID": 1
-  },
-  {
-    "id": 4,
+    "id": 7,
     "curProgress": 1,
     "redeemed": false,
     "redeemDate": null,
     "userID": 1,
-    "merchantID": "11035242",
+    "merchantID": "24212131",
     "programID": 1
   },
   {
-    "id": 5,
-    "curProgress": 4,
+    "id": 8,
+    "curProgress": 3,
     "redeemed": false,
     "redeemDate": null,
     "userID": 1,
-    "merchantID": "15653754",
+    "merchantID": "16775022",
+    "programID": 1
+  },
+  {
+    "id": 9,
+    "curProgress": 2,
+    "redeemed": false,
+    "redeemDate": null,
+    "userID": 1,
+    "merchantID": "20978670",
     "programID": 1
   }
 ]

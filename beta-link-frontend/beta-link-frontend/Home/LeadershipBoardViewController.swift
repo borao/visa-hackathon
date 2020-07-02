@@ -18,10 +18,30 @@ class LeadershipBoardViewController: UIViewController, CustomVC {
     var currentHeight: CGFloat = 0
     var frameWidth: CGFloat?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         frameWidth = self.view.frame.width
+        var isInOrderList: Bool = false
+        
+        var names: [String] = []
+        var imgs: [String] = []
+        var numSent: [Int] = []
+        
+        if leadershipBoardDictionaries.keys.contains(self.merchant!.id) {
+            isInOrderList = true
+            var lst = leadershipBoardDictionaries[self.merchant!.id]!
+            print(lst)
+            for dict in lst {
+                guard let name = dict!["senderID_id__user__username"] as? String else { continue }
+                guard let img = dict!["senderID_id__profilePic"] as? String else { continue }
+                guard let num = dict!["totalNumberSent"] as? Int else { continue }
+                names.append(name + " the Minion")
+                imgs.append(img)
+                numSent.append(num)
+            }
+        }
+        //keys: senderID_id__user__username, senderID_id__profilePic, totalNumberSent
+        
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
         scrollView.isUserInteractionEnabled = true
@@ -39,8 +59,8 @@ class LeadershipBoardViewController: UIViewController, CustomVC {
 //        scrollView.addSubview(generateSectionHeaderLabel(text: "Blue Angel Cafe"))
         scrollView.addSubview(generateMerchantPicture(pictureName: "tfl", merchantName: "Blue Angel Cafe"))
         scrollView.addSubview(generateLeadershipTitlePicture())
-        for i in (0...2) {
-            scrollView.addSubview(generateNameCard(imgName: "minion", text1: "Carl the Minion", text2: "@carlminion", text3: "", font1: 20, font2: 14, font3: 1, labelName: "#" + String(i + 1), x: 10, y: currentHeight, sender: self))
+        for i in 0..<names.count {
+            scrollView.addSubview(generateNameCard(imgPath: imgs[i], text1: names[i], text2: "@" + names[i], text3: "", font1: 21, font2: 14, font3: 1, labelName: "#" + String(i + 1), x: 10, y: currentHeight, sender: self))
         }
         scrollView.addSubview(generateViewMoreButton(text: "View Full Leadership Board"))
         
@@ -51,14 +71,22 @@ class LeadershipBoardViewController: UIViewController, CustomVC {
     }
     
     func generateMerchantPicture(pictureName: String, merchantName: String) -> UIImageView {
-            let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: frameWidth! - 30)
-            let imgView = UIImageView(frame: frame)
-            imgView.contentMode = .scaleToFill
-            imgView.clipsToBounds = true
-            imgView.image = UIImage(named: pictureName)
-            
-            currentHeight += frameWidth! - 30
-            return imgView
+        let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: frameWidth! - 30)
+        let imgView = UIImageView(frame: frame)
+        imgView.contentMode = .scaleToFill
+        imgView.clipsToBounds = true
+        imgView.image = UIImage(named: pictureName)
+        let separator: Character = "."
+        let tokens = self.merchant!.picturePath.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+        if (tokens.count >= 2) {
+            if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                imgView.image = UIImage(contentsOfFile: path)
+            }
+        }
+    
+        
+        currentHeight += frameWidth! - 30
+        return imgView
     }
     
     func generateLeadershipTitlePicture() -> UIImageView {

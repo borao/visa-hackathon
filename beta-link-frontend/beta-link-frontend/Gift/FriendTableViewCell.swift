@@ -10,11 +10,24 @@ import UIKit
 
 class FriendTableViewCell: UITableViewCell {
     
-    var imageName: String? {didSet {profileImageView.image = UIImage(named: self.imageName!)}}
+    var imagePath: String? {
+        didSet {
+            let separator: Character = "."
+            let tokens = imagePath!.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+            var img = UIImage(named: "minion")
+            if (tokens.count >= 2) {
+                if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                    img = UIImage(contentsOfFile: path)
+                }
+            }
+            profileImageView.image = img
+        }
+    }
     
     let profileImageView: UIImageView = {
         let imgView = UIImageView()
-        imgView.contentMode = .scaleAspectFill
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
         imgView.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         imgView.layer.cornerRadius = 35
         imgView.layer.borderWidth = 1.5

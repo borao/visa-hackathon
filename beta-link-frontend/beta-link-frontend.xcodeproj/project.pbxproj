@@ -19,7 +19,12 @@
 		BD2FF76A24A455A300EE422D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2FF76224A455A300EE422D /* Utils.swift */; };
 		BD32F10B24AB9D3B00107966 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD32F10A24AB9D3B00107966 /* EndPoint.swift */; };
 		BD4DFFA424AA63C30030B1AA /* SelectAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4DFFA324AA63C30030B1AA /* SelectAmountViewController.swift */; };
-		BD6E789C24A73DC200E420A8 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = BD6E789B24A73DC200E420A8 /* db.sqlite3 */; };
+		BD7B349B24AD71E400E4E5B5 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = BD7B349A24AD71E400E4E5B5 /* db.sqlite3 */; };
+		BD7B349D24AD896400E4E5B5 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7B349C24AD896400E4E5B5 /* QRCodeViewController.swift */; };
+		BD7B349F24AD8C6500E4E5B5 /* ImageDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7B349E24AD8C6500E4E5B5 /* ImageDisplayViewController.swift */; };
+		BD7B34A124AD979200E4E5B5 /* AllMerchantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7B34A024AD979200E4E5B5 /* AllMerchantsViewController.swift */; };
+		BD7B34A324ADA44F00E4E5B5 /* LoyaltyProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7B34A224ADA44F00E4E5B5 /* LoyaltyProgramViewController.swift */; };
+		BD7B34A524ADB1AF00E4E5B5 /* LoyaltyProgramDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7B34A424ADB1AF00E4E5B5 /* LoyaltyProgramDetailViewController.swift */; };
 		BD84D76224A44FE0007D563E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD84D76124A44FE0007D563E /* AppDelegate.swift */; };
 		BD84D76424A44FE0007D563E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD84D76324A44FE0007D563E /* SceneDelegate.swift */; };
 		BD84D76724A44FE0007D563E /* Beta_Link.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BD84D76524A44FE0007D563E /* Beta_Link.xcdatamodeld */; };
@@ -27,7 +32,7 @@
 		BD84D76E24A44FE2007D563E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD84D76D24A44FE2007D563E /* Preview Assets.xcassets */; };
 		BD84D77124A44FE2007D563E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD84D76F24A44FE2007D563E /* LaunchScreen.storyboard */; };
 		BDAE4C0A24A703430005A215 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAE4C0924A703430005A215 /* Database.swift */; };
-		BDBCE21F24A680D2004C5362 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBCE21E24A680D2004C5362 /* UserInfo.swift */; };
+		BDCE672824AD471E000F0F92 /* media in Resources */ = {isa = PBXBuildFile; fileRef = BDCE672724AD471E000F0F92 /* media */; };
 		BDCF3E6E24AAC4A0003EE7BA /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */; };
 		BDE0283D24A47105002760A3 /* LeadershipBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE0283C24A47105002760A3 /* LeadershipBoardViewController.swift */; };
 		BDE0283F24A476F8002760A3 /* GiftSendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE0283E24A476F8002760A3 /* GiftSendingViewController.swift */; };
@@ -50,7 +55,12 @@
 		BD2FF76224A455A300EE422D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		BD32F10A24AB9D3B00107966 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		BD4DFFA324AA63C30030B1AA /* SelectAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAmountViewController.swift; sourceTree = "<group>"; };
-		BD6E789B24A73DC200E420A8 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
+		BD7B349A24AD71E400E4E5B5 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
+		BD7B349C24AD896400E4E5B5 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		BD7B349E24AD8C6500E4E5B5 /* ImageDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDisplayViewController.swift; sourceTree = "<group>"; };
+		BD7B34A024AD979200E4E5B5 /* AllMerchantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMerchantsViewController.swift; sourceTree = "<group>"; };
+		BD7B34A224ADA44F00E4E5B5 /* LoyaltyProgramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyProgramViewController.swift; sourceTree = "<group>"; };
+		BD7B34A424ADB1AF00E4E5B5 /* LoyaltyProgramDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyProgramDetailViewController.swift; sourceTree = "<group>"; };
 		BD84D75E24A44FE0007D563E /* beta-link-frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "beta-link-frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD84D76124A44FE0007D563E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD84D76324A44FE0007D563E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +70,7 @@
 		BD84D77024A44FE2007D563E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD84D77224A44FE2007D563E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDAE4C0924A703430005A215 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		BDBCE21E24A680D2004C5362 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		BDCE672724AD471E000F0F92 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; path = media; sourceTree = "<group>"; };
 		BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
 		BDE0283C24A47105002760A3 /* LeadershipBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadershipBoardViewController.swift; sourceTree = "<group>"; };
 		BDE0283E24A476F8002760A3 /* GiftSendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftSendingViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +116,7 @@
 				BDE0284024A47ECA002760A3 /* CategoryViewController.swift */,
 				BD2FF75D24A455A300EE422D /* MerchantPageViewController.swift */,
 				BDE0283C24A47105002760A3 /* LeadershipBoardViewController.swift */,
+				BD7B34A024AD979200E4E5B5 /* AllMerchantsViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -126,6 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				BD2FF75E24A455A300EE422D /* ProfileViewController.swift */,
+				BD7B349C24AD896400E4E5B5 /* QRCodeViewController.swift */,
+				BD7B349E24AD8C6500E4E5B5 /* ImageDisplayViewController.swift */,
+				BD7B34A224ADA44F00E4E5B5 /* LoyaltyProgramViewController.swift */,
+				BD7B34A424ADB1AF00E4E5B5 /* LoyaltyProgramDetailViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -138,7 +153,6 @@
 				BD32F10A24AB9D3B00107966 /* EndPoint.swift */,
 				BD2FF75C24A455A300EE422D /* MainTabBarViewController.swift */,
 				BD2FF75B24A455A300EE422D /* PlusButtonSubclass.swift */,
-				BDBCE21E24A680D2004C5362 /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,7 +172,7 @@
 		BD84D75524A44FE0007D563E = {
 			isa = PBXGroup;
 			children = (
-				BD6E789B24A73DC200E420A8 /* db.sqlite3 */,
+				BD7B349A24AD71E400E4E5B5 /* db.sqlite3 */,
 				BD84D76024A44FE0007D563E /* beta-link-frontend */,
 				BD84D75F24A44FE0007D563E /* Products */,
 				403BDB3AA40E0AC2D59431C1 /* Pods */,
@@ -179,6 +193,7 @@
 			children = (
 				BDCF3E6D24AAC4A0003EE7BA /* credentials.plist */,
 				BD84D77224A44FE2007D563E /* Info.plist */,
+				BDCE672724AD471E000F0F92 /* media */,
 				BD2FF79224A466CD00EE422D /* Other */,
 				BD2FF79124A466C300EE422D /* Model */,
 				BD2FF78F24A4669C00EE422D /* Gift */,
@@ -261,8 +276,9 @@
 				BD84D77124A44FE2007D563E /* LaunchScreen.storyboard in Resources */,
 				BD84D76E24A44FE2007D563E /* Preview Assets.xcassets in Resources */,
 				BDCF3E6E24AAC4A0003EE7BA /* credentials.plist in Resources */,
+				BD7B349B24AD71E400E4E5B5 /* db.sqlite3 in Resources */,
 				BD84D76B24A44FE2007D563E /* Assets.xcassets in Resources */,
-				BD6E789C24A73DC200E420A8 /* db.sqlite3 in Resources */,
+				BDCE672824AD471E000F0F92 /* media in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,10 +350,11 @@
 			files = (
 				BD0C83C824A5123B00228AAA /* GiftSentViewController.swift in Sources */,
 				BD2FF76724A455A300EE422D /* FriendTableViewCell.swift in Sources */,
+				BD7B349F24AD8C6500E4E5B5 /* ImageDisplayViewController.swift in Sources */,
 				BDE0283F24A476F8002760A3 /* GiftSendingViewController.swift in Sources */,
-				BDBCE21F24A680D2004C5362 /* UserInfo.swift in Sources */,
 				BDE0284124A47ECA002760A3 /* CategoryViewController.swift in Sources */,
 				BD84D76224A44FE0007D563E /* AppDelegate.swift in Sources */,
+				BD7B34A324ADA44F00E4E5B5 /* LoyaltyProgramViewController.swift in Sources */,
 				BD84D76724A44FE0007D563E /* Beta_Link.xcdatamodeld in Sources */,
 				BD2FF76324A455A300EE422D /* PlusButtonSubclass.swift in Sources */,
 				BD2FF76424A455A300EE422D /* MainTabBarViewController.swift in Sources */,
@@ -346,9 +363,12 @@
 				BD32F10B24AB9D3B00107966 /* EndPoint.swift in Sources */,
 				BD2FF76A24A455A300EE422D /* Utils.swift in Sources */,
 				BD4DFFA424AA63C30030B1AA /* SelectAmountViewController.swift in Sources */,
+				BD7B34A524ADB1AF00E4E5B5 /* LoyaltyProgramDetailViewController.swift in Sources */,
 				BD2FF76924A455A300EE422D /* HomeViewController.swift in Sources */,
+				BD7B34A124AD979200E4E5B5 /* AllMerchantsViewController.swift in Sources */,
 				BDAE4C0A24A703430005A215 /* Database.swift in Sources */,
 				BD2FF76624A455A300EE422D /* ProfileViewController.swift in Sources */,
+				BD7B349D24AD896400E4E5B5 /* QRCodeViewController.swift in Sources */,
 				BD2FF76824A455A300EE422D /* FriendListViewController.swift in Sources */,
 				BD84D76424A44FE0007D563E /* SceneDelegate.swift in Sources */,
 			);

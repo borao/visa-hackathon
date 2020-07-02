@@ -12,8 +12,7 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     /* - MARK: Data input */
-    var friendNames: [String]? = ["Bob the minion", "Kevin the minion", "Carl the minion", "Alice the minion"]
-    var friendAccountNames: [String]? = ["@Bob the minion", "@Kevin the minion", "@Carl the minion", "@Alice the minion"]
+    var friends: [Friend] = []
     var selectedMerchant: Merchant?
     
     /* - MARK: User Interface */
@@ -24,6 +23,13 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        for dict in friendDictionaries {
+            guard let name = dict!["friendB_id__user__username"] as? String else { continue }
+            guard let path = dict!["friendB_id__profilePic"] as? String else { continue }
+            guard let id = dict!["friendB_id__id"] as? Int else { continue }
+            friends.append(Friend(id: id, name: name + " the Minion", picturePath: path))
+        }
+        
         frameWidth = self.view.frame.width
         self.view.backgroundColor = .white
         self.view.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
@@ -39,14 +45,14 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friendNames!.count
+        return friends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell") as? FriendTableViewCell {
-            cell.imageName = "minion"
-            cell.nameLabel.text = self.friendNames![indexPath.row]
-            cell.userNameLabel.text = self.friendAccountNames![indexPath.row]
+            cell.imagePath = self.friends[indexPath.row].picturePath
+            cell.nameLabel.text = self.friends[indexPath.row].name
+            cell.userNameLabel.text = "@" + self.friends[indexPath.row].name
             return cell
         }
         return UITableViewCell()
@@ -66,12 +72,12 @@ class FriendListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (selectedMerchant == nil) {
-            let vc = HomeViewController()
-            vc.selectedRecipientName = self.friendNames![indexPath.row]
+            let vc = AllMerchantsViewController()
+            vc.selectedRecipient = self.friends[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = SelectAmountViewController()
-            vc.recipientName = self.friendNames![indexPath.row]
+            vc.recipient = self.friends[indexPath.row]
             vc.merchant = self.selectedMerchant
             self.navigationController?.pushViewController(vc, animated: true)
         }

@@ -18,10 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        let end = EndPoint()
-//        end.read()
+        
         let db = DatabaseHelper()
-        db.read()
+        db.readMerchants()
+        db.readUsers()
+        db.readOrders()
+        loggedInUser = userLookUp(id: 1)
+        
+        let ep = EndPoint()
+        ep.readFriendShip()
+        for order in allOrders {
+            ep.readLeadershipBoard(merchantID: order)
+        }
+        ep.readProgram()
+        
         GIDSignIn.sharedInstance().clientID = "595292143921-pdbbj32vms3qlvp7bh42dc6htdsagp64.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
         return true

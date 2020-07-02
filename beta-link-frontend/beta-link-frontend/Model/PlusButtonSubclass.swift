@@ -50,6 +50,7 @@ class CYLPlusButtonSubclass: CYLPlusButton,CYLPlusButtonSubclassing {
     static func plusChildViewController() -> UIViewController! {
         let vc = FriendListViewController()
         let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.tintColor = visaBlue
         return nav
         
     }

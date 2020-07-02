@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "star.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -10,12 +11,11 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "star.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

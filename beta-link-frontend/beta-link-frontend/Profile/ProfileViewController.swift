@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController, CustomVC {
     var userName: String? = nil
     
     /* - MARK: User Interface */
+    let selector = #selector(ProfileViewController.pushImageVC(sender:))
     let spacer: CGFloat = 10
     var currentHeight: CGFloat = 0
     var frameWidth: CGFloat?
@@ -56,19 +57,23 @@ class ProfileViewController: UIViewController, CustomVC {
     
     // Profile section
     func generateProfileContainerView() -> UIView {
-        return generateNameCard(imgName: "minion", text1: "Bob the Minion", text2: "New York, NY", text3: "Level-5 user", font1: 22, font2: 14, font3: 14, labelName: "❤️", x: 20, y: currentHeight, sender: self)
+        return generateNameCard(imgPath: "minion", text1: "Bob the Minion", text2: "New York, NY", text3: "Level-5 user", font1: 22, font2: 14, font3: 14, x: 0, y: currentHeight)
     }
     
     // Loyalty program + view friend button section
     func generateButtonContainer(pictureName: String, text: String) -> UIView {
         // make image
+        let recognizer = ImageTappedGestureRecognizer(target: self, action: #selector(pushLoyaltyVC))
+        
         let imgView = UIImageView()
         imgView.image = UIImage(named: pictureName)
         imgView.contentMode = .scaleAspectFill
         imgView.clipsToBounds = true
         imgView.layer.cornerRadius = 10
+        imgView.isUserInteractionEnabled = true
         imgView.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         imgView.backgroundColor = visaBlue
+        imgView.addGestureRecognizer(recognizer)
         
         // make button
         let button = UIButton()
@@ -77,14 +82,27 @@ class ProfileViewController: UIViewController, CustomVC {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.contentHorizontalAlignment = .left
         button.backgroundColor = visaBlue
+        button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
         // make container
         let container = generateUnevenContainerView(left: imgView, right: button, ratio: 0.1, x: 30, y: currentHeight, width: frameWidth! - 30, height: 34, spacing: 10, sender: self)
+        recognizer.imageName = "loyalty_page"
+        container.isUserInteractionEnabled = true
         container.backgroundColor = visaBlue
         
         return container
         
+    }
+    
+    @objc func pushLoyaltyVC() {
+        self.navigationController?.pushViewController(LoyaltyProgramViewController(), animated: true)
+    }
+    
+    @objc func pushImageVC(sender: ImageTappedGestureRecognizer) {
+        let vc = ImageDisplayViewController()
+        vc.name = sender.imageName
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // Manage gift section
@@ -96,6 +114,10 @@ class ProfileViewController: UIViewController, CustomVC {
         imgView.layer.cornerRadius = 10
         imgView.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         imgView.backgroundColor = .white
+        let tap1 = ImageTappedGestureRecognizer(target: self, action: selector)
+        tap1.imageName = "p1"
+        imgView.addGestureRecognizer(tap1)
+        imgView.isUserInteractionEnabled = true
         
         let imgView2 = UIImageView()
         imgView2.image = UIImage(named: "manage_redeemed")
@@ -104,6 +126,10 @@ class ProfileViewController: UIViewController, CustomVC {
         imgView2.layer.cornerRadius = 10
         imgView2.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         imgView2.backgroundColor = .white
+        let tap2 = ImageTappedGestureRecognizer(target: self, action: selector)
+        tap2.imageName = "p2"
+        imgView2.addGestureRecognizer(tap2)
+        imgView2.isUserInteractionEnabled = true
         
         let imgView3 = UIImageView()
         imgView3.image = UIImage(named: "manage_past_gift")
@@ -112,9 +138,14 @@ class ProfileViewController: UIViewController, CustomVC {
         imgView3.layer.cornerRadius = 10
         imgView3.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         imgView3.backgroundColor = .white
+        let tap3 = ImageTappedGestureRecognizer(target: self, action: selector)
+        tap3.imageName = "p3"
+        imgView3.addGestureRecognizer(tap3)
+        imgView3.isUserInteractionEnabled = true
         
         let container = generateEvenContainerView(subViews: [imgView, imgView2, imgView3], x: 35, y: currentHeight, width: frameWidth! - 70, height: 100, verticleSpacing: 0, horizontalSpacing: 0, sender: self)
         container.backgroundColor = .white
+        container.isUserInteractionEnabled = true
         
         return container
     }
@@ -207,14 +238,69 @@ class ProfileViewController: UIViewController, CustomVC {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func generateNameCard(imgPath: String, text1: String, text2: String, text3: String, font1: CGFloat, font2: CGFloat, font3: CGFloat, x: CGFloat, y: CGFloat, color: UIColor = .white) -> UIView {
+        let imgView = UIImageView()
+        imgView.contentMode = .scaleAspectFill
+        imgView.layer.cornerRadius = 35
+        imgView.layer.borderWidth = 1.5
+        imgView.layer.borderColor = visaOrange.cgColor
+        let img = UIImage(named: "minion")
+        imgView.image = img
+        imgView.clipsToBounds = true
+        
+        let label1 = UILabel()
+        label1.text = text1
+        label1.font = UIFont.systemFont(ofSize: font1)
+        label1.textColor =  visaOrange
+        
+        let label2 = UILabel()
+        label2.text = text2
+        label2.font = UIFont.systemFont(ofSize: font2)
+        label2.textColor =  visaBlue
+        
+        let label3 = UILabel()
+        label3.text = text3
+        label3.font = UIFont.systemFont(ofSize: font3)
+        label3.textColor = .darkGray
+        
+        let stack = UIStackView()
+        stack.distribution = .fillEqually
+        stack.backgroundColor = .white
+        stack.axis = .vertical
+        stack.addArrangedSubview(label1)
+        stack.addArrangedSubview(label2)
+        stack.addArrangedSubview(label3)
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        let rightLabel = UIImageView()
+        rightLabel.image = UIImage(named: "qr")
+        rightLabel.clipsToBounds = true
+        rightLabel.backgroundColor = .white
+        rightLabel.contentMode = .scaleAspectFit
+        rightLabel.translatesAutoresizingMaskIntoConstraints = false
+        rightLabel.isUserInteractionEnabled = true
+        let tapRecognizer = ImageTappedGestureRecognizer(target: self, action: selector)
+        tapRecognizer.imageName = "qr2"
+        
+        let secondView =  generateUnevenContainerView(left: stack, right: rightLabel, ratio: 0.6, x: x + 100, y: y, width: self.frameWidth! - 130 - x, height: 100, spacing: 0, sender: self, color: color)
+        
+        let frame = CGRect(x: x, y: y, width: self.frameWidth! - x - 60, height: 100)
+        let container = UIView(frame: frame)
+        container.backgroundColor = .white
+        container.addGestureRecognizer(tapRecognizer)
+        
+        container.addSubview(imgView)
+        container.addSubview(secondView)
+        container.isUserInteractionEnabled = true
+        imgView.frame = CGRect(x: 15, y: 15, width: 70, height: 70)
+        secondView.frame = CGRect(x: 100, y: 0, width: self.frameWidth! - 60, height: 100)
+        
+        incrementBySpacer(h: spacer)
+        
+        return container
     }
-    */
 
+    @objc func displayQR() {
+        self.navigationController?.pushViewController(QRCodeViewController(), animated: true)
+    }
 }

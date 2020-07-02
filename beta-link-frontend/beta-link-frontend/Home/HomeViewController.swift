@@ -13,12 +13,13 @@ import SQLite
 
 class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelegate, StoryViewDataSource, UIScrollViewDelegate, CustomVC {
     /* - MARK: Data input */
-    var selectedRecipientName: String?
+    var selectedRecipient: Friend?
     
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
     var currentHeight: CGFloat = 0
     var frameWidth: CGFloat?
+    var favoriteMerchants: [Merchant] = []
     
     override func viewDidAppear(_ animated: Bool) {
         self.view.endEditing(true)
@@ -26,6 +27,17 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        while (loyaltyProgramDictionaries.count == 0) {
+            continue
+        }
+        
+        let ep = EndPoint()
+        for dict in loyaltyProgramDictionaries {
+            guard let id = dict!["merchantID"] as? String else { continue }
+            self.favoriteMerchants.append(merchantLookUp(merchantID: id)!)
+//            ep.readProgramDetail(merchantID: id)
+        }
 
         frameWidth = self.view.frame.width
         let scrollView = UIScrollView()
@@ -34,8 +46,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
         scrollView.addGestureRecognizer(tapRecognizer)
         scrollView.backgroundColor = .white
         scrollView.isUserInteractionEnabled = true
-        
         self.view.addSubview(scrollView)
+        
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
@@ -44,7 +56,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
 
         scrollView.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
         currentHeight += 50
-        scrollView.addSubview(generateSearchBar())
+//        scrollView.addSubview(generateSearchBar())
         scrollView.addSubview(generateTopCategory())
         scrollView.addSubview(generateBottomCategory())
         scrollView.addSubview(generateSeparationLine(sender: self))
@@ -56,7 +68,8 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
             let name = merchant.name
             let category = merchant.category
             let hour = "Hours: Sat - Sun, 11:00AM - 5:00PM"
-            scrollView.addSubview(generateRecommendation(imgName: "tfl", merchantName: name, merchantCategory: category, merchantHour: hour))
+            let path = merchant.picturePath
+            scrollView.addSubview(generateRecommendation(imgName: path, merchantName: name, merchantCategory: category, merchantHour: hour))
         }
         scrollView.addSubview(generateViewMoreButton(text: "View More"))
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
@@ -85,7 +98,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
     /* - MARK: Generate Category */
     
     func generateTopCategory() -> UIView {
-        let firstImg = UIImage(named: "coffee")
+        let firstImg = UIImage(named: "food")
         let firstImgView = UIImageView(image: firstImg)
         firstImgView.isUserInteractionEnabled = true
         firstImgView.contentMode = .scaleAspectFit
@@ -93,10 +106,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
         firstImgView.translatesAutoresizingMaskIntoConstraints = false
         let tapRecognizer = CategoryTappedGestureRecognizer(target: self, action: #selector(HomeViewController.pushCategoryVC(sender:)))
         tapRecognizer.category = .food
-        tapRecognizer.recipientName = self.selectedRecipientName
+        tapRecognizer.recipient = self.selectedRecipient
         firstImgView.addGestureRecognizer(tapRecognizer)
 
-        let secondImg = UIImage(named: "fast_food")
+        let secondImg = UIImage(named: "clothing")
         let secondImgView = UIImageView(image: secondImg)
         secondImgView.isUserInteractionEnabled = true
         secondImgView.contentMode = .scaleAspectFit
@@ -104,10 +117,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
         secondImgView.translatesAutoresizingMaskIntoConstraints = false
         let tapRecognizer2 = CategoryTappedGestureRecognizer(target: self, action: #selector(HomeViewController.pushCategoryVC(sender:)))
         tapRecognizer2.category = .clothing
-        tapRecognizer2.recipientName = self.selectedRecipientName
+        tapRecognizer2.recipient = self.selectedRecipient
         secondImgView.addGestureRecognizer(tapRecognizer2)
 
-        let thirdImg = UIImage(named: "dessert")
+        let thirdImg = UIImage(named: "grocery")
         let thirdImgView = UIImageView(image: thirdImg)
         thirdImgView.isUserInteractionEnabled = true
         thirdImgView.contentMode = .scaleAspectFit
@@ -115,6 +128,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
         thirdImgView.translatesAutoresizingMaskIntoConstraints = false
         let tapRecognizer3 = CategoryTappedGestureRecognizer(target: self, action: #selector(HomeViewController.pushCategoryVC(sender:)))
         tapRecognizer3.category = .grocery
+        tapRecognizer3.recipient = self.selectedRecipient
         thirdImgView.addGestureRecognizer(tapRecognizer3)
         
         let stack = generateEvenContainerView(subViews: [firstImgView, secondImgView, thirdImgView], x: 20, y: currentHeight, width: frameWidth! - 40, height: 120, verticleSpacing: 0, horizontalSpacing: 0, sender: self)
@@ -123,7 +137,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
     }
     
     func generateBottomCategory() -> UIView {
-        let firstImg = UIImage(named: "clothing")
+        let firstImg = UIImage(named: "beauty")
         let firstImgView = UIImageView(image: firstImg)
         firstImgView.isUserInteractionEnabled = true
         firstImgView.contentMode = .scaleAspectFit
@@ -131,10 +145,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
         firstImgView.translatesAutoresizingMaskIntoConstraints = false
         let tapRecognizer = CategoryTappedGestureRecognizer(target: self, action: #selector(HomeViewController.pushCategoryVC(sender:)))
         tapRecognizer.category = .beauty
-        tapRecognizer.recipientName = self.selectedRecipientName
+        tapRecognizer.recipient = self.selectedRecipient
         firstImgView.addGestureRecognizer(tapRecognizer)
 
-        let secondImg = UIImage(named: "grocery")
+        let secondImg = UIImage(named: "sport")
         let secondImgView = UIImageView(image: secondImg)
         secondImgView.isUserInteractionEnabled = true
         secondImgView.contentMode = .scaleAspectFit
@@ -142,10 +156,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
         secondImgView.translatesAutoresizingMaskIntoConstraints = false
         let tapRecognizer2 = CategoryTappedGestureRecognizer(target: self, action: #selector(HomeViewController.pushCategoryVC(sender:)))
         tapRecognizer2.category = .sport
-        tapRecognizer2.recipientName = self.selectedRecipientName
+        tapRecognizer2.recipient = self.selectedRecipient
         secondImgView.addGestureRecognizer(tapRecognizer2)
 
-        let thirdImg = UIImage(named: "beauty")
+        let thirdImg = UIImage(named: "other")
         let thirdImgView = UIImageView(image: thirdImg)
         thirdImgView.isUserInteractionEnabled = true
         thirdImgView.contentMode = .scaleAspectFit
@@ -153,7 +167,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
         thirdImgView.translatesAutoresizingMaskIntoConstraints = false
         let tapRecognizer3 = CategoryTappedGestureRecognizer(target: self, action: #selector(HomeViewController.pushCategoryVC(sender:)))
         tapRecognizer3.category = .other
-        tapRecognizer3.recipientName = self.selectedRecipientName
+        tapRecognizer3.recipient = self.selectedRecipient
         thirdImgView.addGestureRecognizer(tapRecognizer3)
 
         let stack = generateEvenContainerView(subViews: [firstImgView, secondImgView, thirdImgView], x: 20, y: currentHeight, width: frameWidth! - 40, height: 120, verticleSpacing: 0, horizontalSpacing: 0, sender: self)
@@ -163,7 +177,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
     
     @objc func pushCategoryVC(sender: CategoryTappedGestureRecognizer) {
         let vc = CategoryViewController()
-        vc.recipientName = self.selectedRecipientName
+        vc.recipient = self.selectedRecipient
         vc.category = sender.category
         vc.merchants = []
         for merchant in allMerchants {
@@ -176,11 +190,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
     /* - MARK: End Generate Category */
         
     func generateRecommendation(imgName: String, merchantName: String, merchantCategory: MerchantCaterogy, merchantHour: String) -> UIView {
-        let container = generateUnevenContainerView(left: generateRecommendImage(name: "tfl"), right: generateRecommendLabel(name: merchantName, category: merchantCategory), ratio: 0.4, x: 30, y: currentHeight, width: frameWidth! - 60, height: 100, spacing: spacer, sender: self)
+        let container = generateUnevenContainerView(left: generateRecommendImage(name: imgName), right: generateRecommendLabel(name: merchantName, category: merchantCategory), ratio: 0.4, x: 30, y: currentHeight, width: frameWidth! - 60, height: 100, spacing: spacer, sender: self)
         container.isUserInteractionEnabled = true
         let tapRecognizer = MerchantTappedGestureRecognizer(target: self, action: #selector(segueToMerchantPage(sender:)))
         tapRecognizer.merchant = merchantLookUp(merchantName: merchantName)
-        tapRecognizer.recipientName = self.selectedRecipientName
+        tapRecognizer.recipient = self.selectedRecipient
         container.addGestureRecognizer(tapRecognizer)
         return container
     }
@@ -188,15 +202,23 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
     @objc func segueToMerchantPage(sender: MerchantTappedGestureRecognizer) {
         let vc = MerchantPageViewController()
         vc.merchant = sender.merchant
-        vc.selectedRecipientName = sender.recipientName
+        vc.selectedRecipient = sender.recipient
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func generateRecommendImage(name: String) -> UIImageView {
-        let img = UIImage(named: name)
+        let separator: Character = "."
+        let tokens = name.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+        var img = UIImage(named: "tfl")
+        if (tokens.count >= 2) {
+            if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                img = UIImage(contentsOfFile: path)
+            }
+        }
         let imgView = UIImageView()
         imgView.image = img
         imgView.contentMode = .scaleAspectFill
+        imgView.clipsToBounds = true
         imgView.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         
         return imgView
@@ -290,12 +312,20 @@ class HomeViewController: UIViewController, UISearchBarDelegate, StoryViewDelega
     }
     
     func numberOfItems(in storyView: StoryView) -> Int {
-        return 5
+        return self.favoriteMerchants.count
     }
     
     func storyView(_ storyView: StoryView, storyForItem item: Int) -> Story {
-        let img = UIImage(named: "tfl2")!
-        let story = Story(image: img, title: "The Fench Laundry", color: visaBlue, borderWidth: 1.5)
+        let merchant = self.favoriteMerchants[item]
+        var img = UIImage(named: "tfl")
+        let separator: Character = "."
+        let tokens = merchant.picturePath.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+        if (tokens.count >= 2) {
+            if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                img = UIImage(contentsOfFile: path)
+            }
+        }
+        let story = Story(image: img!, title: merchant.name, color: visaBlue, borderWidth: 1.5)
         return story
     }
 

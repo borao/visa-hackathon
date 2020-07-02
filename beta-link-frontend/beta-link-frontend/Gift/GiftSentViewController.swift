@@ -10,7 +10,7 @@ import UIKit
 
 class GiftSentViewController: UIViewController, CustomVC {
     /* - MARK: Data input */
-    var recipientName: String?
+    var recipient: Friend?
     var amountSelected: Int?
     var merchant: Merchant?
     
@@ -31,7 +31,7 @@ class GiftSentViewController: UIViewController, CustomVC {
         self.view.addSubview(generateMiddleTitle(text: "Sent!", font: 28, color: visaBlue))
         self.view.addSubview(generateMiddleTitle(text: "Thank you for your support to local merchants!", font: 16, color: visaOrange))
         currentHeight += spacer * 3
-        self.view.addSubview(generateNameCard(imgName: "minion", text1: recipientName!, text2: "will receive your gift!", text3: "", font1: 16, font2: 16, font3: 1, labelName: "", x: 20, y: currentHeight, sender: self))
+        self.view.addSubview(generateNameCard(imgPath: self.recipient!.picturePath, text1: recipient!.name, text2: "will receive your gift!", text3: "", font1: 16, font2: 16, font3: 1, labelName: "", x: 20, y: currentHeight, sender: self))
         // Do any additional setup after loading the view.
     }
     

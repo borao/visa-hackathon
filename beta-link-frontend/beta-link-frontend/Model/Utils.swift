@@ -9,32 +9,8 @@
 import Foundation
 import UIKit
 
-let spacer: CGFloat = 10
-protocol CustomVC {
-    var currentHeight: CGFloat { get set }
-    var frameWidth: CGFloat? { get set }
-    
-    func incrementBySpacer(h: CGFloat)
-}
-
-class MerchantTappedGestureRecognizer: UITapGestureRecognizer {
-    var merchant: Merchant?
-    var recipientName: String?
-    var amountSelected: Int?
-}
-
-class CategoryTappedGestureRecognizer: UITapGestureRecognizer {
-    var recipientName: String?
-    var category: MerchantCaterogy?
-}
-
-class CustomButton: UIButton {
-    var merchant: Merchant?
-    var recipientName: String?
-    var amountSelected: Int?
-}
-
-enum MerchantCaterogy: Int {
+// MARK: Data structure
+enum MerchantCaterogy {
     case food
     case clothing
     case grocery
@@ -52,27 +28,71 @@ struct Merchant {
     var state: String
     var address: String
     var city: String
+    var picturePath: String
 }
 
-func merchantLookUp(merchantName: String) -> Merchant? {
-    for merchant in allMerchants {
-        if merchant.name == merchantName {
-            return merchant
-        }
-    }
-    return nil
+struct User {
+    var userID: Int
+    var street: String
+    var city: String
+    var state: String
+    var zipcode: String
+    var longitude: Double
+    var latitude: Double
+    var phoneNumber: Int
+    var profilePicture: String
 }
 
-let categoryToString = [MerchantCaterogy.food: "Food",
-                        MerchantCaterogy.clothing: "Clothing",
-                        MerchantCaterogy.grocery: "Grocery",
-                        MerchantCaterogy.beauty: "Beauty",
-                        MerchantCaterogy.sport: "Sport",
-                        MerchantCaterogy.other: "More",]
+struct Friend {
+    var id: Int
+    var name: String
+    var picturePath: String
+}
+
+// MARK: constants
+
+let spacer: CGFloat = 10
+
+let categoryToString = [MerchantCaterogy.food: "Food & Drink",
+MerchantCaterogy.clothing: "Clothing",
+MerchantCaterogy.grocery: "Grocery",
+MerchantCaterogy.beauty: "Beauty",
+MerchantCaterogy.sport: "Sport",
+MerchantCaterogy.other: "Others"]
 
 let visaOrange = UIColor(rgb: 0xEF991A)
 let visaBlue = UIColor(rgb: 0x0D158C)
 let skyBlue = UIColor(rgb: 0x00CCFF)
+
+// MARK: Helper classes
+
+class MerchantTappedGestureRecognizer: UITapGestureRecognizer {
+    var merchant: Merchant?
+    var recipient: Friend?
+    var amountSelected: Int?
+}
+
+class ImageTappedGestureRecognizer: UITapGestureRecognizer {
+    var imageName: String?
+}
+
+class CategoryTappedGestureRecognizer: UITapGestureRecognizer {
+    var recipient: Friend?
+    var category: MerchantCaterogy?
+}
+
+class CustomButton: UIButton {
+    var merchant: Merchant?
+    var recipient: Friend?
+    var amountSelected: Int?
+}
+
+protocol CustomVC {
+    var currentHeight: CGFloat { get set }
+    var frameWidth: CGFloat? { get set }
+    
+    func incrementBySpacer(h: CGFloat)
+}
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
@@ -92,7 +112,34 @@ extension UIColor {
     }
 }
 
-// MARK: User Interface Helper
+// MARK: Helper Functions
+
+func merchantLookUp(merchantName: String) -> Merchant? {
+    for merchant in allMerchants {
+        if merchant.name.lowercased() == merchantName.lowercased() {
+            return merchant
+        }
+    }
+    return nil
+}
+
+func merchantLookUp(merchantID: String) -> Merchant? {
+    for merchant in allMerchants {
+        if merchant.id == merchantID {
+            return merchant
+        }
+    }
+    return nil
+}
+
+func userLookUp(id: Int) -> User? {
+    for user in allUsers {
+        if user.userID == id {
+            return user
+        }
+    }
+    return nil
+}
 
 func generateVisaImage(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) -> UIImageView {
     let img = UIImage(named: "visa")
@@ -169,13 +216,22 @@ func generateEvenContainerView(subViews: [UIView], x: CGFloat, y: CGFloat, width
     return container
 }
 
-func generateNameCard(imgName: String, text1: String, text2: String, text3: String, font1: CGFloat, font2: CGFloat, font3: CGFloat, labelName: String, x: CGFloat, y: CGFloat, sender: CustomVC, color: UIColor = .white) -> UIView {
+func generateNameCard(imgPath: String, text1: String, text2: String, text3: String, font1: CGFloat, font2: CGFloat, font3: CGFloat, labelName: String, x: CGFloat, y: CGFloat, sender: CustomVC, color: UIColor = .white) -> UIView {
     let imgView = UIImageView()
     imgView.contentMode = .scaleAspectFill
     imgView.layer.cornerRadius = 35
     imgView.layer.borderWidth = 1.5
     imgView.layer.borderColor = visaOrange.cgColor
-    imgView.image = UIImage(named: imgName)
+    let pathIn: String = imgPath
+    let separator: Character = "."
+    let tokens = pathIn.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+    var img = UIImage(named: "minion")
+    if (tokens.count >= 2) {
+        if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+            img = UIImage(contentsOfFile: path)
+        }
+    }
+    imgView.image = img
     imgView.clipsToBounds = true
     
     let label1 = UILabel()

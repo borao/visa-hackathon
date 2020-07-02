@@ -11,7 +11,7 @@ import UIKit
 class GiftSendingViewController: UIViewController, CustomVC {
     /* - MARK: Data input */
     var userName: String? = nil
-    var recipientName: String?
+    var recipient: Friend?
     var merchant: Merchant?
     var amountSelected: Int?
     
@@ -38,15 +38,16 @@ class GiftSendingViewController: UIViewController, CustomVC {
         currentHeight += 50
         currentHeight += spacer
         scrollView.addSubview(generateMiddleTitle(text: "Sending a $" + String(self.amountSelected!) + ".00 Gift to", font: 22, color: visaBlue, numOfLine: 1, height: 40))
-        scrollView.addSubview(generateMiddleTitle(text: recipientName!, font: 24, color: visaOrange, numOfLine: 1, height: 40))
+        scrollView.addSubview(generateMiddleTitle(text: recipient!.name, font: 24, color: visaOrange, numOfLine: 1, height: 40))
         currentHeight += spacer * 0.5
         scrollView.addSubview(generateSendingPictures())
         scrollView.addSubview(generateMiddleTitle(text: "To spend @", font: 14, color: visaBlue, numOfLine: 1, height: 50))
         scrollView.addSubview(generateMerchantPicture())
         scrollView.addSubview(generateMiddleTitle(text: self.merchant!.name, font: 20, color: visaBlue, numOfLine: 1, height: 40))
-        currentHeight += spacer
-        scrollView.addSubview(generateMiddleTitle(text: "Thank you for your support to local merchants!", font: 14, color: visaOrange, numOfLine: 1, height: 30))
-        scrollView.addSubview(generateMiddleTitle(text: "  NOTE: If receiver does not make a purchase within 7 days, entire amount will be refunded. If receiver does not spend all $10.00, the rest will be donated to the merchant to support smaller merchants.", font: 14, color: skyBlue, numOfLine: 4, height: 90))
+        currentHeight += spacer * 2
+        scrollView.addSubview(generateThankPicture())
+//        scrollView.addSubview(generateMiddleTitle(text: "Thank you for your support to local merchants!", font: 14, color: visaOrange, numOfLine: 1, height: 30))
+//        scrollView.addSubview(generateMiddleTitle(text: "  NOTE: If receiver does not make a purchase within 7 days, entire amount will be refunded. If receiver does not spend all $10.00, the rest will be donated to the merchant to support smaller merchants.", font: 14, color: skyBlue, numOfLine: 4, height: 90))
         scrollView.addSubview(generateConfirmButton())
         
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
@@ -82,6 +83,13 @@ class GiftSendingViewController: UIViewController, CustomVC {
         
         let imgView3 = UIImageView()
         imgView3.image = UIImage(named: "minion")
+        let separator: Character = "."
+        let tokens = self.recipient!.picturePath.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+        if (tokens.count >= 2) {
+            if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                imgView3.image = UIImage(contentsOfFile: path)
+            }
+        }
         imgView3.contentMode = .scaleAspectFit
         imgView3.clipsToBounds = true
         imgView3.layer.cornerRadius = 35
@@ -96,8 +104,15 @@ class GiftSendingViewController: UIViewController, CustomVC {
     func generateMerchantPicture() -> UIImageView {
         let imgView = UIImageView()
         imgView.image = UIImage(named: "tfl")
+        let separator: Character = "."
+        let tokens = self.merchant!.picturePath.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+        if (tokens.count >= 2) {
+            if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                imgView.image = UIImage(contentsOfFile: path)
+            }
+        }
         imgView.frame = CGRect(x: (frameWidth! - 100) / 2, y: currentHeight, width: 100, height: 100)
-        imgView.contentMode = .scaleAspectFit
+        imgView.contentMode = .scaleAspectFill
         imgView.clipsToBounds = true
         imgView.layer.cornerRadius = 35
         imgView.layer.borderColor = visaBlue.cgColor
@@ -106,11 +121,22 @@ class GiftSendingViewController: UIViewController, CustomVC {
         return imgView
     }
     
+    func generateThankPicture() -> UIImageView {
+        let imgView = UIImageView()
+        imgView.frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: 300)
+        imgView.clipsToBounds = true
+        imgView.contentMode = .scaleAspectFill
+        imgView.image = UIImage(named: "warn")
+        imgView.backgroundColor = .white
+        currentHeight += 300
+        return imgView
+    }
+    
     func generateConfirmButton() -> UIButton {
         let button = CustomButton()
         button.frame = CGRect(x: 20, y: currentHeight, width: frameWidth! - 40, height: 65)
         button.setImage(UIImage(named: "confirm_gift"), for: .normal)
-        button.recipientName = self.recipientName
+        button.recipient = self.recipient
         button.amountSelected = self.amountSelected
         button.addTarget(self, action: #selector(GiftSendingViewController.confirmButtonTapped(sender:)), for: .touchUpInside)
         return button
@@ -119,7 +145,7 @@ class GiftSendingViewController: UIViewController, CustomVC {
     @objc func confirmButtonTapped(sender: CustomButton) {
         let vc = GiftSentViewController()
         vc.amountSelected = self.amountSelected
-        vc.recipientName = sender.recipientName
+        vc.recipient = sender.recipient
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

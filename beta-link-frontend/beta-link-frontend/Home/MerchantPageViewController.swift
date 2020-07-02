@@ -12,11 +12,10 @@ class MerchantPageViewController: UIViewController, CustomVC {
     
     /* - MARK: Data input */
     var userName: String? = nil
-    var selectedRecipientName: String?
+    var selectedRecipient: Friend?
     
     var merchant: Merchant?
-    var merchantWeekendHour: String? = "Hours: Sat - Sun, 11:00AM - 5:00PM"
-    
+    var merchantWeekendHour: String = "Sat - Sun, 11:00AM - 5:00PM"
 
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
@@ -26,6 +25,7 @@ class MerchantPageViewController: UIViewController, CustomVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         frameWidth = self.view.frame.width
+        
         self.view.backgroundColor = .white
         self.view.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
@@ -37,16 +37,26 @@ class MerchantPageViewController: UIViewController, CustomVC {
         self.view.addSubview(generateMerchantPicture(pictureName: "tfl"))
         currentHeight += spacer
         self.view.addSubview(generateNumGifted())
-        self.view.addSubview(generateMerchantInfo(category: categoryToString[self.merchant!.category]!, hour: "Hours: Sat - Sun, 11:00AM - 5:00PM", address: self.merchant!.address + self.merchant!.city))
+        self.view.addSubview(generateMerchantInfo(category: self.merchant!.category, hour: merchantWeekendHour, address1: self.merchant!.address, address2: self.merchant!.city + ", " + self.merchant!.state))
         self.view.addSubview(generateButtons())
     }
     
     func generateMerchantPicture(pictureName: String) -> UIImageView {
+//        let pathIn: String = "media/merchantLogo/JAMBA JUICE.jpg"
+        let pathIn: String = self.merchant!.picturePath
+        let separator: Character = "."
+        let tokens = pathIn.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+        var img = UIImage(named: pictureName)
+        if (tokens.count >= 2) {
+            if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                img = UIImage(contentsOfFile: path)
+            }
+        }
         let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: frameWidth! - 60)
         let imgView = UIImageView(frame: frame)
         imgView.contentMode = .scaleToFill
         imgView.clipsToBounds = true
-        imgView.image = UIImage(named: pictureName)
+        imgView.image = img
         
         currentHeight += frameWidth! - 60
         return imgView
@@ -61,9 +71,9 @@ class MerchantPageViewController: UIViewController, CustomVC {
         return imgView
     }
     
-    func generateMerchantInfo(category: String, hour: String, address: String) -> UIView {
+    func generateMerchantInfo(category: MerchantCaterogy, hour: String, address1: String, address2: String) -> UIView {
         let label1 = UILabel()
-        label1.text = category
+        label1.text = categoryToString[category]!
         label1.font = UIFont.systemFont(ofSize: 18)
         label1.textColor =  visaOrange
         
@@ -74,13 +84,13 @@ class MerchantPageViewController: UIViewController, CustomVC {
         label2.numberOfLines = 2
         
         let label3 = UILabel()
-        label3.text = hour
+        label3.text = address1
         label3.font = UIFont.systemFont(ofSize: 15)
-        label3.textColor =  .black
+        label3.textColor =  .darkGray
         label3.numberOfLines = 2
         
         let label4 = UILabel()
-        label4.text = address
+        label4.text = address2
         label4.font = UIFont.systemFont(ofSize: 17)
         label4.textColor = .darkGray
         label4.numberOfLines = 2
@@ -124,13 +134,13 @@ class MerchantPageViewController: UIViewController, CustomVC {
     }
     
     @objc func sendGiftButtonPressed(sender: CustomButton!) {
-        if (selectedRecipientName == nil) {
+        if (selectedRecipient == nil) {
             let vc = FriendListViewController()
             vc.selectedMerchant = self.merchant
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = SelectAmountViewController()
-            vc.recipientName = self.selectedRecipientName
+            vc.recipient = self.selectedRecipient
             vc.merchant = self.merchant
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -138,6 +148,7 @@ class MerchantPageViewController: UIViewController, CustomVC {
     
     @objc func leadershipButtonPressed(sender: CustomButton!) {
         let vc = LeadershipBoardViewController()
+        vc.merchant = self.merchant
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

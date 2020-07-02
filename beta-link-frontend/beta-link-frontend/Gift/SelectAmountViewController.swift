@@ -12,7 +12,7 @@ class SelectAmountViewController: UIViewController, CustomVC {
     
     /* - MARK: Data input */
     var userName: String?
-    var recipientName: String?
+    var recipient: Friend?
     var merchant: Merchant?
     
     /* - MARK: User Interface */
@@ -30,8 +30,8 @@ class SelectAmountViewController: UIViewController, CustomVC {
         self.view.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
         currentHeight += 50
         currentHeight += spacer * 3
-        for i in 1...3 {
-            self.view.addSubview(generateAmountLabel(amount1: 5 * i, amount2: 10 * i))
+        for i in stride(from: 5, through: 25, by: 10) {
+            self.view.addSubview(generateAmountLabel(amount1: i, amount2: i + 5))
         }
         
         // Do any additional setup after loading the view.
@@ -47,7 +47,7 @@ class SelectAmountViewController: UIViewController, CustomVC {
         label.isUserInteractionEnabled = true
         let tapRecognizer = MerchantTappedGestureRecognizer(target: self, action: #selector(SelectAmountViewController.pushSendingPageVC(sender:)))
         tapRecognizer.merchant = self.merchant
-        tapRecognizer.recipientName = self.recipientName
+        tapRecognizer.recipient = self.recipient
         tapRecognizer.amountSelected = amount1
         label.addGestureRecognizer(tapRecognizer)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ class SelectAmountViewController: UIViewController, CustomVC {
         label2.isUserInteractionEnabled = true
         let tapRecognizer2 = MerchantTappedGestureRecognizer(target: self, action: #selector(SelectAmountViewController.pushSendingPageVC(sender:)))
         tapRecognizer2.merchant = self.merchant
-        tapRecognizer2.recipientName = self.recipientName
+        tapRecognizer2.recipient = self.recipient
         tapRecognizer2.amountSelected = amount2
         label2.addGestureRecognizer(tapRecognizer2)
         label2.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +78,7 @@ class SelectAmountViewController: UIViewController, CustomVC {
     @objc func pushSendingPageVC(sender: MerchantTappedGestureRecognizer) {
         let vc = GiftSendingViewController()
         vc.merchant = sender.merchant
-        vc.recipientName = sender.recipientName
+        vc.recipient = sender.recipient
         vc.amountSelected = sender.amountSelected
         self.navigationController?.pushViewController(vc, animated: true)
     }

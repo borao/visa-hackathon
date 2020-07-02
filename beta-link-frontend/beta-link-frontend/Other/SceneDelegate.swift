@@ -22,7 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainTabBarVc = MainTabBarViewController(viewControllers: self.viewControllers(), tabBarItemsAttributes: self.tabBarItemsAttributesForController())
 
         if let windowScene = scene as? UIWindowScene {
-            print("here")
             self.window = UIWindow(windowScene: windowScene)
             self.window?.frame  = UIScreen.main.bounds
             self.window?.rootViewController = mainTabBarVc
@@ -38,6 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let home = UINavigationController(rootViewController: HomeViewController())
         home.navigationBar.tintColor = visaBlue
         let profile =   UINavigationController(rootViewController: ProfileViewController())
+        profile.navigationBar.tintColor = visaBlue
         let viewControllers = [home, profile]
         
         return viewControllers

@@ -13,7 +13,7 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate, UISearchBa
     /* - MARK: Data input */
     var category: MerchantCaterogy?
     var merchants: [Merchant]?
-    var recipientName: String?
+    var recipient: Friend?
     
     /* - MARK: User Interface */
     let spacer: CGFloat = 10
@@ -45,11 +45,11 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate, UISearchBa
         
         scrollView.addSubview(generateVisaImage(x: 0, y: currentHeight, width: frameWidth!, height: 50))
         currentHeight += 50
-        scrollView.addSubview(generateSearchBar())
+//        scrollView.addSubview(generateSearchBar())
         scrollView.addSubview(generateMap())
         scrollView.addSubview(generateSeparationLine(sender: self))
         for i in 0 ..< self.merchants!.count {
-            scrollView.addSubview(generateRecommendation(imgName: "tfl", merchantName: self.merchants![i].name, merchantHour: "Hours: Sat - Sun, 11:00AM - 5:00PM"))
+            scrollView.addSubview(generateRecommendation(imgName: self.merchants![i].picturePath, merchantName: self.merchants![i].name, merchantHour: "Hours: Sat - Sun, 11:00AM - 5:00PM"))
         }
         
         scrollView.contentSize = CGSize(width: frameWidth!, height: currentHeight + 10 * spacer)
@@ -73,38 +73,28 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate, UISearchBa
     func generateMap() -> MKMapView {
         let frame = CGRect(x: 0, y: currentHeight, width: frameWidth!, height: frameWidth! - 30)
         let map = MKMapView(frame: frame)
-        let initialLocation = CLLocation(latitude: 37.8396956, longitude: -122.2888659)
-        let ikes = CLLocation(latitude: 37.8390459, longitude: -122.2917944)
-        let superDuper = CLLocation(latitude: 37.8412014, longitude: -122.2937132)
-        let initialRegion = MKCoordinateRegion(center: initialLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let initialLocation = CLLocation(latitude: self.merchants![0].lat, longitude: self.merchants![0].lon)
+        let initialRegion = MKCoordinateRegion(center: initialLocation.coordinate, latitudinalMeters: 8000, longitudinalMeters: 8000)
         map.setRegion(initialRegion, animated: true)
         
-        let homeAnnotation = MKPointAnnotation()
-        homeAnnotation.coordinate = initialLocation.coordinate
-        homeAnnotation.title = "Parc on Powell"
-        homeAnnotation.subtitle = "Shiro's"
-        map.addAnnotation(homeAnnotation)
-        
-        let ikesAnnotation = MKPointAnnotation()
-        ikesAnnotation.coordinate = ikes.coordinate
-        ikesAnnotation.title = "Ike's Sandwich"
-        map.addAnnotation(ikesAnnotation)
-        
-        let superDuperAnnotation = MKPointAnnotation()
-        superDuperAnnotation.coordinate = superDuper.coordinate
-        superDuperAnnotation.title = "Super Duper Burger"
-        map.addAnnotation(superDuperAnnotation)
-        
+        for merchant in self.merchants! {
+            let annotation = MKPointAnnotation()
+            let location = CLLocation(latitude: merchant.lat, longitude: merchant.lon)
+            annotation.coordinate = location.coordinate
+            annotation.title = merchant.name
+            map.addAnnotation(annotation)
+        }
+
         currentHeight += frameWidth! - 30 + spacer
         return map
     }
     
     func generateRecommendation(imgName: String, merchantName: String, merchantHour: String) -> UIView {
-        let container = generateUnevenContainerView(left: generateRecommendImage(name: "tfl"), right: generateRecommendLabel(merchantName: merchantName), ratio: 0.4, x: 30, y: currentHeight, width: frameWidth! - 60, height: 100, spacing: spacer, sender: self)
+        let container = generateUnevenContainerView(left: generateRecommendImage(name: imgName), right: generateRecommendLabel(merchantName: merchantName), ratio: 0.4, x: 30, y: currentHeight, width: frameWidth! - 60, height: 100, spacing: spacer, sender: self)
         container.isUserInteractionEnabled = true
         let tapRecognizer = MerchantTappedGestureRecognizer(target: self, action: #selector(CategoryViewController.pushMerchantPageVC(sender:)))
         tapRecognizer.merchant = merchantLookUp(merchantName: merchantName)
-        tapRecognizer.recipientName = self.recipientName
+        tapRecognizer.recipient = self.recipient
         container.addGestureRecognizer(tapRecognizer)
         return container
     }
@@ -112,15 +102,23 @@ class CategoryViewController: UIViewController, UIScrollViewDelegate, UISearchBa
     @objc func pushMerchantPageVC(sender: MerchantTappedGestureRecognizer) {
         let vc = MerchantPageViewController()
         vc.merchant = sender.merchant
-        vc.selectedRecipientName = sender.recipientName
+        vc.selectedRecipient = sender.recipient
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func generateRecommendImage(name: String) -> UIImageView {
-        let img = UIImage(named: name)
+        let separator: Character = "."
+        let tokens = name.split(separator: separator, maxSplits: 1, omittingEmptySubsequences: true)
+        var img = UIImage(named: "tfl")
+        if (tokens.count >= 2) {
+            if let path = Bundle.main.path(forResource: String(tokens[0]), ofType: String(tokens[1])) {
+                img = UIImage(contentsOfFile: path)
+            }
+        }
         let imgView = UIImageView()
         imgView.image = img
         imgView.contentMode = .scaleAspectFill
+        imgView.clipsToBounds = true
         imgView.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         
         return imgView

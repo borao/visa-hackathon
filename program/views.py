@@ -36,10 +36,14 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
 
     @action(detail=False,url_path='getProgramByUserAndMerchant/(?P<userID>[^/.]+)/(?P<merchantID>[^/.]+)')
     def getProgramByUserAndMerchant(self, request, userID, merchantID):
-        programs = self.queryset.filter(userID = userID).filter(merchantID = merchantID).filter(redeemed=False).select_related()\
-            .values('merchantID_id__merchantID', 'curProgress', 'redeemed', 'programID_id__description', 'programID_id__programName', 'programID_id__goal', 'programID_id__reward',
+        # programs = self.queryset.filter(userID = userID).filter(merchantID = merchantID).filter(redeemed=False).select_related()\
+        #     .values('merchantID_id__merchantID', 'curProgress', 'redeemed', 'programID_id__description', 'programID_id__programName', 'programID_id__goal', 'programID_id__reward',
+        #             'merchantID_id__merchantName', 'merchantID_id__profilePic')
+        # for bug
+        programs = self.queryset.filter(userID = userID).filter(merchantID = merchantID).filter(redeemed=False).select_related() \
+            .values('merchantID_id__merchantID', 'programID_id__description', 'programID_id__programName', 'programID_id__reward',
                     'merchantID_id__merchantName', 'merchantID_id__profilePic')
-        return HttpResponse(programs)
+        return HttpResponse(programs, content_type='application/json')
 
     # Frontend can just do a post with wanted amount of additional progress, this will update or create the record
     def perform_create(self, serializer):

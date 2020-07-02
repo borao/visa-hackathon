@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "curProgress": 2,
+    "redeemed": false,
+    "redeemDate": null,
+    "userID": 1,
+    "merchantID": "29992901",
+    "programID": 1
+  },
+  {
+    "id": 2,
+    "curProgress": 3,
+    "redeemed": false,
+    "redeemDate": null,
+    "userID": 1,
+    "merchantID": "62506377",
+    "programID": 1
+  },
+  {
+    "id": 3,
+    "curProgress": 6,
+    "redeemed": false,
+    "redeemDate": null,
+    "userID": 1,
+    "merchantID": "62506377",
+    "programID": 1
+  },
+  {
+    "id": 4,
+    "curProgress": 1,
+    "redeemed": false,
+    "redeemDate": null,
+    "userID": 1,
+    "merchantID": "11035242",
+    "programID": 1
+  },
+  {
+    "id": 5,
+    "curProgress": 4,
+    "redeemed": false,
+    "redeemDate": null,
+    "userID": 1,
+    "merchantID": "15653754",
+    "programID": 1
+  }
+]

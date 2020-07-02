@@ -27,3 +27,6 @@ python manage.py createsuperuser --email betalink@example.com --username betalin
 python manage.py populateOrderData order/data/orderData.json
 python manage.py populateMerchantData merchant/data/merchantData.json
 python manage.py populateCustomerData users/data/customerData.json
+python manage.py populateProgramData program/data/programData.json
+python manage.py populateEnrollmentData program/data/enrollmentData.json
+

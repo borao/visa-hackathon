@@ -1,0 +1,9 @@
+[
+  {
+    "programID": 1,
+    "programName": "The Gift Sender",
+    "description": "send 5 gifts for one cup of cappuccino",
+    "goal": 5,
+    "reward": "cappuccino"
+  }
+]
